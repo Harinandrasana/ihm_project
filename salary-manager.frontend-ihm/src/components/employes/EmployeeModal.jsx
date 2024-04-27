@@ -28,8 +28,8 @@ const EmployeeModal = ({
 
   const OverlayTwo = () => (
     <ModalOverlay
-      bg="none"
-      backdropFilter="auto"
+      bg="rgba(172, 157, 172, 0.8)" // Couleur avec une opacité de 0.8
+      backdropFilter={"inherit"}
       backdropInvert="80%"
       backdropBlur="2px"
     />
