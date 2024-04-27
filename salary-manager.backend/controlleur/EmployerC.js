@@ -32,7 +32,7 @@ exports.addNewEmployer = async (req, res) => {
     var tel = req.body.tel;
     var dateEmbauche = req.body.dateEmbauche;
     try {
-        const result = await Employee.addPaie(idPoste, nom, prenom, dateNaissance, adresse, image_url, email, tel, dateEmbauche);
+        const result = await Employee.addEmployer(idPoste, nom, prenom, dateNaissance, adresse, image_url, email, tel, dateEmbauche);
         res.json({ msg: "ajout avec succès" });
         console.log(result);
     } catch (err) {

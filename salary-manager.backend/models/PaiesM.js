@@ -2,7 +2,7 @@ const db = require("../connectionDB/db");
 // const ToutEmployer = require('./toutEmplyer');
 
 
-class Employee {
+class Paie {
 
     static async getAll(callback) {
         db.query("SELECT * FROM salary_manager.paies;", (err, result) => {
@@ -72,4 +72,4 @@ class Employee {
 
 }
 
-module.exports = Employee;
+module.exports = Paie;

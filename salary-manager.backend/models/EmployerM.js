@@ -17,7 +17,7 @@ class Employee {
     static async addEmployer(idPoste, nom, prenom, dateNaissance, adresse, image_url, email, tel, dateEmbauche) {
 
         return new Promise(resolve => {
-            db.query(
+            const test = db.query(
                 `INSERT INTO salary_manager.employes(idPoste, nom, prenom, dateNaissance, adresse, image_url, email, tel, dateEmbauche) VALUES(?, ?, ?,?, ?, ?, ?, ?, ?)`,
                 [idPoste, nom, prenom, dateNaissance, adresse, image_url, email, tel, dateEmbauche],
                 (err, result) => {
@@ -25,6 +25,7 @@ class Employee {
                         resolve(result); //si une erreur se produit renvoyer l'erreur
                 }
             )
+            console.log(test)
         });
     }
 

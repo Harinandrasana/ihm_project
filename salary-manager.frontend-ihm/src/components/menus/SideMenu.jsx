@@ -38,9 +38,10 @@ const SideMenu = () => {
       mr={1}
       ml="0"
       pl={3}
+      roundedRight={21}
       pr={3}
       alignItems="center"
-      bg={"#202f60"}
+      bg={"#1e2530"}
     >
       <Stack mt={0} mx="auto">
         {/* <HStack textAlign="center" mt={10} pl={9}>
@@ -60,6 +61,7 @@ const SideMenu = () => {
               <Button
                 bg="none"
                 verticalAlign="middle"
+                mt={20}
                 color="white"
                 fontSize={22}
                 {...(activeItem === "Accueil" && {

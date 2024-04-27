@@ -39,19 +39,19 @@ const Layout = () => {
           p={2}
           h={82}
           verticalAlign="middle"
-          bg="#202f60"
+          bg="#1e2530"
           area={"header"}
           position="relative"
         >
           <NavBar />
         </GridItem>
-        <GridItem area={"nav"} mt={0}>
-          {isMobile && <RouteBar />}
+        <GridItem area={"nav"} mt={3}>
+          {/* {isMobile && <RouteBar />} */}
           <Box ml={isMobile && "90%"}>
             <SideBar />
           </Box>
         </GridItem>
-        <GridItem alignItems={"center"} mr={2} p={2} rounded={21} area={"main"}>
+        <GridItem alignItems={"center"} mr={0} p={2} rounded={21} area={"main"}>
           {!isMobile && <RouteBar />}
           <Outlet />
         </GridItem>

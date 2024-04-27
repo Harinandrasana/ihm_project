@@ -6,6 +6,8 @@ import displayToast from "../../hooks/useNotification";
 import { useNavigate } from "react-router-dom";
 import useNotification from "../../hooks/useNotification";
 import { DeleteIcon, EditIcon, AddIcon } from "@chakra-ui/icons";
+import { Icon } from "@chakra-ui/react";
+import { FaMoneyCheckAlt } from "react-icons/fa";
 
 const ActionButton = ({ employeeId }) => {
   const { displayToast } = useNotification();
@@ -91,7 +93,9 @@ const ActionButton = ({ employeeId }) => {
       <Button bg="#dc1f09" onClick={() => deleteEmployee()}>
         <DeleteIcon />
       </Button>
-      <Button bg="#50f8c4">Payer</Button>
+      <Button bg="#50f8c4">
+        <Icon as={FaMoneyCheckAlt} boxSize={6} />
+      </Button>
     </HStack>
   );
 };

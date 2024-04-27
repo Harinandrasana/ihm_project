@@ -390,14 +390,6 @@ const EmployeeAdd = ({ onClose }) => {
                         h={50}
                         type="date"
                         max={new Date().toISOString().split("T")[0]} // Bloquer les dates après aujourd'hui
-                        disabled={
-                          new Date().getDay() === 0 || new Date().getDay() === 6
-                        } // Désactiver les samedis et dimanches
-                        color={
-                          new Date().getDay() === 0 || new Date().getDay() === 6
-                            ? "red"
-                            : ""
-                        } // Colorer en rouge les samedis et dimanches
                       />
                       {isEmpty && values.dateEmbauche === "" && (
                         <Text color={"red"} fontSize={10} pr={130}>
