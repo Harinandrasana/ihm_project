@@ -9,6 +9,7 @@ import {
   Container,
   HStack,
   Select,
+  Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import apiClient from "../../services/api-client";
@@ -23,6 +24,7 @@ const DeductionAdd = ({ onClose }) => {
   });
   const { displayToast } = useNotification();
   const [postes, setPostes] = useState([]);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -43,6 +45,18 @@ const DeductionAdd = ({ onClose }) => {
     const response = await apiClient.get("/allP");
     setPostes(response.data);
   };
+
+  const checkCurrentInput = () => {
+    if(
+      values.idPoste !== 0 &&
+      values.design !== "" &&
+      values.tauxD !== ""
+    ) {
+      setIsEmpty(!isEmpty);
+    } else {
+      setIsEmpty(true);
+    }
+  }
 
   return (
     <Container color="black" maxW="full" rounded={21} textAlign="center">
@@ -68,6 +82,11 @@ const DeductionAdd = ({ onClose }) => {
                   </option>
                 ))}
               </Select>
+              {(isEmpty && values.idPoste === 0) && (
+                <Text color={"red"} fontSize={14} pl={"auto"} >
+                  Veuiller selection un Poste
+                </Text>
+              )}
             </Box>
             <FormControl id="design">
               <FormLabel>Designation</FormLabel>
@@ -85,6 +104,11 @@ const DeductionAdd = ({ onClose }) => {
                 placeholder="Designation du deduction"
                 _placeholder={{ color: "#8c8c8c" }}
               />
+              {(isEmpty && values.design === "") && (
+                <Text color={"red"} fontSize={14} pl={"auto"}>
+                  Veuiller remplire le formulaire
+                </Text>
+              )}
             </FormControl>
             <FormControl id="tauxD">
               <FormLabel>Taux à déduire</FormLabel>
@@ -101,6 +125,11 @@ const DeductionAdd = ({ onClose }) => {
                 placeholder="taux déduit"
                 _placeholder={{ color: "#8c8c8c" }}
               />
+              {(isEmpty && values.tauxD === "") && (
+                <Text color={"red"} fontSize={14} pl={"auto"} >
+                  Veuiller remplire le formulaire
+                </Text>
+              )}
             </FormControl>
             <Box mt={2} ml="auto" mr="auto">
               <HStack spacing={8}>
@@ -109,7 +138,7 @@ const DeductionAdd = ({ onClose }) => {
                     Annuler
                   </Button>
                 </Link>
-                <Button p={7} type="submit" bg="green">
+                <Button onClick={checkCurrentInput} p={7} type="submit" bg="green">
                   Valider
                 </Button>
               </HStack>
