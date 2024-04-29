@@ -31,7 +31,7 @@ class Employee {
 
     static async getById(id) {
         return new Promise((resolve, reject) => {
-            const test = db.query("SELECT * FROM employes WHERE idEmploye=?", [id], (err, result) => {
+            const test = db.query("SELECT *, nomPoste FROM employes LEFT JOIN postes ON employes.idPoste = postes.idPoste WHERE idEmploye=?", [id], (err, result) => {
                 if (err) {
 
                     reject(err);

@@ -43,6 +43,20 @@ class Paie {
 
     }
 
+    static async getByEmployeeId(id) {
+        return new Promise((resolve, reject) => {
+            const test = db.query("SELECT * FROM salary_manager.paies WHERE idEmploye = ? AND YEAR(datePaie) = YEAR(CURDATE()) AND MONTH(datePaie) = MONTH(CURDATE())", [id], (err, result) => {
+                if (err) {
+
+                    reject(err);
+                }
+                resolve(result);
+            })
+        })
+        console.log(test)
+
+    }
+
     // static async delete(id) {
     //     return new Promise(resolve => {
     //         db.query("DELETE FROM employes WHERE idEmploye = ?", [id], (err, result) => {

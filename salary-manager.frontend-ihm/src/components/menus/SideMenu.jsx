@@ -67,6 +67,7 @@ const SideMenu = () => {
                 {...(activeItem === "Accueil" && {
                   color: "#bcc0c3",
                   fontWeight: 500,
+                  transform: "scale(1.5)",
                 })}
                 _hover={{
                   transform: "scale(1.3)",
@@ -91,9 +92,10 @@ const SideMenu = () => {
                 verticalAlign="middle"
                 color="white"
                 fontSize={22}
-                {...(activeItem === "Accueil" && {
+                {...(activeItem === "Employes" && {
                   color: "#bcc0c3",
                   fontWeight: 500,
+                  transform: "scale(1.5)",
                 })}
                 _hover={{
                   transform: "scale(1.3)",
@@ -114,9 +116,10 @@ const SideMenu = () => {
                 verticalAlign="middle"
                 color="white"
                 fontSize={22}
-                {...(activeItem === "Accueil" && {
+                {...(activeItem === "Postes" && {
                   color: "#bcc0c3",
                   fontWeight: 500,
+                  transform: "scale(1.5)",
                 })}
                 _hover={{
                   transform: "scale(1.3)",
@@ -141,9 +144,10 @@ const SideMenu = () => {
                 verticalAlign="middle"
                 color="white"
                 fontSize={22}
-                {...(activeItem === "Accueil" && {
+                {...(activeItem === "Deductions" && {
                   color: "#bcc0c3",
                   fontWeight: 500,
+                  transform: "scale(1.5)",
                 })}
                 _hover={{
                   transform: "scale(1.3)",
@@ -164,9 +168,10 @@ const SideMenu = () => {
                 verticalAlign="middle"
                 color="white"
                 fontSize={22}
-                {...(activeItem === "Accueil" && {
+                {...(activeItem === "Paies" && {
                   color: "#bcc0c3",
                   fontWeight: 500,
+                  transform: "scale(1.5)",
                 })}
                 _hover={{
                   transform: "scale(1.3)",

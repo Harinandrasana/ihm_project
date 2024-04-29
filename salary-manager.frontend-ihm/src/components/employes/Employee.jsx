@@ -53,7 +53,7 @@ const Employee = ({ employeeId }) => {
       >
         <Image
           objectFit="cover"
-          minW={320}
+          minW={300}
           rounded={21}
           maxW={{ base: "100%", sm: "200px" }}
           src={
@@ -80,7 +80,7 @@ const Employee = ({ employeeId }) => {
                   </Tr>
                   <Tr>
                     <Th>Poste</Th>
-                    <Td>{employee.idPoste}</Td>
+                    <Td>{employee.nomPoste}</Td>
                   </Tr>
                   <Tr>
                     <Th>Nom</Th>

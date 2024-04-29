@@ -40,7 +40,7 @@ router.delete('/delA/:id', AvantageControlleur.deleteAvantage);
 //route pour tous les traitement des AVANTAGES
 router.post('/paies', PaieControlleur.addNewPaie);
 router.get('/paies', PaieControlleur.getAllPaies);
-// router.get('/oneA/:id', AvantageControlleur.getOneAvantage);
+router.get('/paies/:id', PaieControlleur.getPaieByEmployeeId);
 // router.put('/updateA/:id', AvantageControlleur.updateAvantage);
 // router.delete('/delA/:id', AvantageControlleur.deleteAvantage);
 

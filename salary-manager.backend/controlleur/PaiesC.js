@@ -39,10 +39,20 @@ exports.addNewPaie = async (req, res) => {
 };
 
 
-exports.getEmployeById = async (req, res) => {
+exports.getPaieById = async (req, res) => {
     try {
         var id = req.params.id;
         const data = await Paie.getById(id);
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+exports.getPaieByEmployeeId = async (req, res) => {
+    try {
+        var id = req.params.id;
+        const data = await Paie.getByEmployeeId(id);
         res.json(data);
     } catch (error) {
         res.status(500).json({ error: err.message });

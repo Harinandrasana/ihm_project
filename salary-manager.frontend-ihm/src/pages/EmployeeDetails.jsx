@@ -19,7 +19,7 @@ import { useParams } from "react-router-dom";
 import PieChartComponent from "../components/graph/CustomToltip";
 import Deduction from "../components/employes/Deduction";
 import ActionButton from "../components/employes/ActionButton";
-import Avantages from "../components/avantages/Avantages";
+import PaieStatus from "../components/paies/PaieStatus";
 
 const EmployeeDetails = () => {
   const { employeeId: employeeId } = useParams();
@@ -40,7 +40,13 @@ const EmployeeDetails = () => {
             </Box>
             <Box height="auto" minW={450} ml={10} px={5}>
               <Stack spacing={5} direction="row">
-                <Deduction employeeId={employeeId} />
+                <Box>
+                  <Deduction employeeId={employeeId} />
+                  <Center mt={5}>
+                    <Text mr={5}>Etat du paiement: {"  "} </Text>
+                    <PaieStatus employeeId={employeeId} />
+                  </Center>
+                </Box>
                 <Box
                   mt={5}
                   borderLeft={"1px solid #d7d7d7"}

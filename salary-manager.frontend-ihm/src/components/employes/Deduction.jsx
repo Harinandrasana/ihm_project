@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import apiClient from "../../services/api-client";
 import { TableContainer, Table, Tr, Td, Th } from "@chakra-ui/react";
-import Avantages from "../avantages/Avantages";
 import ShowerGraph from "../graph/ShowerGraph";
 
 const Deduction = ({ employeeId }) => {

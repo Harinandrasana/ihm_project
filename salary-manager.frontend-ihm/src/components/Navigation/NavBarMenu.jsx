@@ -27,7 +27,7 @@ const NavBarMenu = () => {
       <MenuButton
         as={IconButton}
         aria-label="Options"
-        icon={<AiOutlineUser enableBackground="none" />}
+        icon={<AiOutlineUser color="white" />}
         variant="outline"
       />
       <MenuList>

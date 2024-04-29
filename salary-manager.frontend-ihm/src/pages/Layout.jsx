@@ -41,11 +41,12 @@ const Layout = () => {
           verticalAlign="middle"
           bg="#1e2530"
           area={"header"}
-          position="relative"
+          position="fixed"
+          width={"full"}
         >
           <NavBar />
         </GridItem>
-        <GridItem area={"nav"} mt={3}>
+        <GridItem area={"nav"} mt={20} position="fixed">
           {/* {isMobile && <RouteBar />} */}
           <Box ml={isMobile && "90%"}>
             <SideBar />

@@ -78,7 +78,7 @@ const Paies = () => {
               <Tr key={paie.idPaie} borderBottom="2px solid #f3f2f2">
                 <Td verticalAlign="middle">{paie.idPaie}</Td>
                 <Td verticalAlign="middle">{paie.idEmploye}</Td>
-                <Td verticalAlign="middle">{paie.mois}</Td>
+                <Td verticalAlign="middle">{paie.datePaie}</Td>
                 <Td verticalAlign="middle">{paie.salaireNet}</Td>
                 <Td verticalAlign="middle">{paie.salaireBrut}</Td>
                 <Td verticalAlign="middle">{paie.totalDeduction}</Td>
