@@ -76,7 +76,7 @@ const PosteAdd = ({ onClose }) => {
               />
               {
                 (isEmpty && values.nomPoste === "") && (
-                  <Text color={"red"} fontSize={13}  >
+                  <Text color={"red"} fontSize={14} pl="auto" >
                     Veuiller remplire le formulaire
                   </Text>
                 )
@@ -100,7 +100,7 @@ const PosteAdd = ({ onClose }) => {
               />
               {
                 (isEmpty && values.salaire === "") && (
-                  <Text color={"red"} fontSize={13} pr={"10%"} pl={"20%"}>
+                  <Text color={"red"} fontSize={14} pl={"auto"}>
                     Veuiller remplire le formulaire
                   </Text>
                 )

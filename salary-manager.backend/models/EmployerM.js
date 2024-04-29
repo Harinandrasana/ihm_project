@@ -5,7 +5,7 @@ const db = require("../connectionDB/db");
 class Employee {
 
     static async getAll(callback) {
-        db.query("SELECT *, nomPoste FROM salary_manager.employes LEFT JOIN salary_manager.postes ON employes.idPoste = postes.idPoste", (err, result) => {
+        db.query("SELECT *, nomPoste FROM salary_manager.employes LEFT JOIN salary_manager.postes ON employes.idPoste = postes.idPoste ORDER BY employes.idEmploye DESC", (err, result) => {
             if (err) {
                 callback(err, null); //si une erreur se produit renvoyer l'erreur
                 return;
