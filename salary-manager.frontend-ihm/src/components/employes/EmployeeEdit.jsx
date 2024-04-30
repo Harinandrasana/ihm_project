@@ -11,6 +11,7 @@ import {
   Select,
   Center,
   Image,
+  Text,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "../../services/api-client";
@@ -23,6 +24,7 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
   const { displayToast } = useNotification();
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
+  const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
     getEmployee();
@@ -75,6 +77,21 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
 
   if (!employee) return <div>Loading...</div>;
 
+  const checkCurrentInput = () => {
+    if (
+      employee.image_url !== "" &&
+      employee.idPoste !== 0 &&
+      employee.nom !== "" &&
+      employee.prenom !== "" &&
+      employee.dateNaissance !== ""
+    ) {
+      setVisible(!visible);
+      setIsEmpty(!isEmpty);
+    } else {
+      setIsEmpty(true);
+    }
+  }
+
   return (
     <Container color="black" maxW="full" rounded={21} textAlign="center">
       <Box>
@@ -106,6 +123,11 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                         onChange={handleImageChange}
                         display="none"
                       />
+                      {isEmpty && employee.image_url === 0 && (
+                        <Text color={"red"} fontSize={10} pr={"10%"} pl={"20%"}>
+                          Veuller selectionner une image
+                        </Text>
+                      )}
                     </FormLabel>
                   </FormControl>
                 </Box>
@@ -126,6 +148,11 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                         </option>
                       ))}
                     </Select>
+                    {isEmpty && employee.idPoste === 0 && (
+                      <Text color={"red"} fontSize={10} pr={130}>
+                        Veuller selectionner un poste
+                      </Text>
+                    )}
                   </Box>
                   <FormControl id="nom">
                     <FormLabel>Nom</FormLabel>
@@ -142,6 +169,11 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                       placeholder="Nom"
                       _placeholder={{ color: "#8c8c8c" }}
                     />
+                    {isEmpty && employee.nom === "" && (
+                      <Text color={"red"} fontSize={14} pl={"auto"} >
+                        Veuiller inserer le nom !
+                      </Text>
+                    )}
                   </FormControl>
                   <FormControl id="prenom">
                     <FormLabel>Prenom</FormLabel>
@@ -157,6 +189,11 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                       placeholder="Prenom"
                       _placeholder={{ color: "#8c8c8c" }}
                     />
+                    {isEmpty && employee.prenom === "" && (
+                      <Text color={"red"} fontSize={14} pl={"auto"} >
+                        Veuiller inserer le nom !
+                      </Text>
+                    )}
                   </FormControl>
                   <FormControl id="dateNaissance">
                     <FormLabel>Date de naissance</FormLabel>
@@ -174,6 +211,11 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                       h={50}
                       type="date"
                     />
+                    {isEmpty && employee.dateNaissance === "" && (
+                      <Text color={"red"} fontSize={10} pr={130}>
+                        Veuiller selectionner une date
+                      </Text>
+                    )}
                   </FormControl>
                 </Box>
               </HStack>
@@ -196,6 +238,11 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                         placeholder="adresse"
                         _placeholder={{ color: "#8c8c8c" }}
                       />
+                      {isEmpty && employee.adresse === "" && (
+                        <Text color={"red"} fontSize={14} pl={"auto"}>
+                          Veuiller selectionner une adresse
+                        </Text>
+                      )}
                     </FormControl>
                     <FormControl id="email">
                       <FormLabel>Adresse email</FormLabel>
@@ -211,6 +258,11 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                         placeholder="email"
                         _placeholder={{ color: "#8c8c8c" }}
                       />
+                      {isEmpty && employee.email === "" && (
+                        <Text color={"red"} fontSize={14} pl={"auto"}>
+                          Veuller selectionner une email
+                        </Text>
+                      )}
                     </FormControl>
                   </Box>
                   <Box w="90%" mt={2}>
@@ -228,6 +280,11 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                         placeholder="telephone"
                         _placeholder={{ color: "#8c8c8c" }}
                       />
+                      {isEmpty && employee.tel === "" && (
+                        <Text color={"red"} fontSize={10} pr={130}>
+                          Veuller selectionner une adresse
+                        </Text>
+                      )}
                     </FormControl>
                     <FormControl id="dateEmbauche">
                       <FormLabel>dateEmbauche</FormLabel>
@@ -245,6 +302,11 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                         h={50}
                         type="date"
                       />
+                      {isEmpty && employee.dateEmbauche === "" && (
+                        <Text color={"red"} fontSize={10} pr={130}>
+                          Veuller selectionner une date d'embauche
+                        </Text>
+                      )}
                     </FormControl>
                   </Box>
                 </HStack>
@@ -262,13 +324,13 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                     Annuler
                   </Button>
                 </Link> */}
-                <Button p={7} type="submit" bg="green">
+                <Button  p={7} type="submit" bg="green">
                   Valider
                 </Button>
               </HStack>
             </Box>
             <Box {...(visible && { display: "none" })}>
-              <Button onClick={() => setVisible(!visible)}>suivant</Button>
+              <Button onClick={checkCurrentInput}>suivant</Button>
             </Box>
           </Center>
         </form>

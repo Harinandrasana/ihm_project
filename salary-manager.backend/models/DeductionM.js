@@ -4,7 +4,7 @@ class Deductions {
 
     static async allDeduction() {
         return new Promise(resolve => {
-            db.query("SELECT *, nomPoste FROM deductions LEFT JOIN postes ON deductions.idPoste = postes.idPoste ORDER BY deductions.idPoste", (err, result) => {
+            db.query("SELECT *, nomPoste FROM deductions LEFT JOIN postes ON deductions.idPoste = postes.idPoste ORDER BY deductions.idDeduction DESC ", (err, result) => {
                 if (!err)
                     resolve(result);
             });
@@ -13,7 +13,7 @@ class Deductions {
 
     static async addDeduction(nom, taux, idPoste) {
         return new Promise(resolve => {
-            db.query("INSERT INTO deductions(design, tauxD, idPoste) VALUES(?,?,?)", [nom, taux, idPoste], (err, result) => {
+            db.query("INSERT INTO deductions(design, TauxD, idPoste) VALUES(?,?,?)", [nom, taux, idPoste], (err, result) => {
                 if (!err)
                     resolve(result);
             });
@@ -32,7 +32,7 @@ class Deductions {
 
     static async editDeduction(id, idPoste, nom, taux) {
         return new Promise(resolve => {
-            db.query("UPDATE deductions SET idPoste=?, design=?, tauxD=? WHERE idDeduction=?", [idPoste, nom, taux, id], (err, result) => {
+            db.query("UPDATE deductions SET idPoste=?, design=?, TauxD=? WHERE idDeduction=?", [idPoste, nom, taux, id], (err, result) => {
                 if (!err)
                     resolve(result);
             });

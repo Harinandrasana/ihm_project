@@ -4,7 +4,7 @@ class Postes {
 
     static async getAll() {
         return new Promise(resolve => {
-            db.query("SELECT * FROM postes", [], (err, result) => {
+            db.query("SELECT * FROM postes ORDER BY idPoste DESC", [], (err, result) => {
                 if (!err)
                     resolve(result);
             })
