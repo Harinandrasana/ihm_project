@@ -16,6 +16,7 @@ import {
   useColorModeValue,
   Text,
   ModalFooter,
+  InputLeftAddon,
 } from "@chakra-ui/react";
 import { PhoneIcon } from "@chakra-ui/icons";
 import apiClient from "../../services/api-client";
@@ -344,26 +345,38 @@ const EmployeeAdd = ({ onClose }) => {
                       )}
                     </FormControl>
                     <FormControl mt={3} id="tel" isRequired>
-                      <FormLabel>Telephone</FormLabel>
-                      <InputGroup>
-                        <InputLeftElement pointerEvents="none">
-                          <PhoneIcon color="gray.300" />
-                        </InputLeftElement>
+                      <FormLabel>Téléphone</FormLabel>
+                      <InputGroup
+                        h={50}
+                        border={
+                          isEmpty && values.tel === "" && setErrorBorder()
+                        }
+                      >
+                        <InputLeftAddon h={50}>+261</InputLeftAddon>
                         <Input
                           h={50}
                           type="tel"
                           required
-                          border={
-                            isEmpty && values.tel === "" && setErrorBorder()
-                          }
-                          placeholder="+261-XX-XX-XXX-XX"
-                          value={phoneNumber}
-                          onChange={handlePhoneNumberChange}
+                          maxLength={9} // Limiter la longueur du numéro à 11 chiffres
+                          placeholder="XX-XX-XXX-XX"
+                          _placeholder={{ color: "#8c8c8c" }}
+                          onChange={(e) => {
+                            const inputNumber = e.target.value.replace(
+                              /\D/g,
+                              ""
+                            );
+                            if (inputNumber.length <= 9) {
+                              setValues({
+                                ...values,
+                                tel: "+261" + inputNumber,
+                              });
+                            }
+                          }}
                         />
                       </InputGroup>
                       {isEmpty && values.tel === "" && (
                         <Text color={"red"} fontSize={10} pr={100}>
-                          Veuller inserer le numero de telephone
+                          Veuillez insérer le numéro de téléphone
                         </Text>
                       )}
                     </FormControl>

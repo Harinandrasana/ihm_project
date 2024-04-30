@@ -41,13 +41,13 @@ const Paies = () => {
     }
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("fr-FR"); // Formater la date en "jj/mm/aaaa"
+  };
+
   return (
     <Box>
-      <Link to="/paies/add">
-        <Button leftIcon={<AddIcon />} bg="#30e9a8" mb={5}>
-          Ajouter des paies
-        </Button>
-      </Link>
       <TableContainer
         mr={10}
         pt={2}
@@ -60,7 +60,6 @@ const Paies = () => {
         alignContent="center"
       >
         <Table variant="striped" colorScheme="teal">
-          {/* <TableCaption>Listes des employes de la societé</TableCaption> */}
           <Thead h={58}>
             <Tr borderBottom="2px solid #f3f2f2">
               <Th>N° payement</Th>
@@ -78,7 +77,7 @@ const Paies = () => {
               <Tr key={paie.idPaie} borderBottom="2px solid #f3f2f2">
                 <Td verticalAlign="middle">{paie.idPaie}</Td>
                 <Td verticalAlign="middle">{paie.idEmploye}</Td>
-                <Td verticalAlign="middle">{paie.datePaie}</Td>
+                <Td verticalAlign="middle">{formatDate(paie.datePaie)}</Td>
                 <Td verticalAlign="middle">{paie.salaireNet}</Td>
                 <Td verticalAlign="middle">{paie.salaireBrut}</Td>
                 <Td verticalAlign="middle">{paie.totalDeduction}</Td>
