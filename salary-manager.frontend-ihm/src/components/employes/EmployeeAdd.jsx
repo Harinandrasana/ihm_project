@@ -4,7 +4,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Stack,
   Box,
   Container,
   HStack,
@@ -12,13 +11,11 @@ import {
   Image,
   Center,
   InputGroup,
-  InputLeftElement,
-  useColorModeValue,
   Text,
   ModalFooter,
   InputLeftAddon,
+  border,
 } from "@chakra-ui/react";
-import { PhoneIcon } from "@chakra-ui/icons";
 import apiClient from "../../services/api-client";
 import useNotification from "../../hooks/useNotification";
 import empimg from "../../assets/no-image-placeholder.webp";
@@ -126,6 +123,8 @@ const EmployeeAdd = ({ onClose }) => {
     setValues({ ...values, tel: formattedPhoneNumber });
   };
 
+  console.log("idposte values", values.idPoste);
+
   return (
     <Container color="black" maxW="full" rounded={21} textAlign="center">
       <Box>
@@ -175,9 +174,11 @@ const EmployeeAdd = ({ onClose }) => {
                     <Select
                       placeholder="Selectionner poste"
                       _placeholder={{ color: "#8c8c8c" }}
-                      // border={
-                      //   isEmpty && values.idPoste === "" && setErrorBorder()
-                      // }
+                      border={
+                        isEmpty === true && values.idPoste === 0 && values.id
+                          ? setErrorBorder()
+                          : "1px solid black"
+                      }
                       h={50}
                       onChange={(e) =>
                         setValues({
@@ -207,7 +208,11 @@ const EmployeeAdd = ({ onClose }) => {
                       type="text"
                       id="nom"
                       required
-                      border={isEmpty && values.nom === "" && setErrorBorder()}
+                      border={
+                        isEmpty && values.nom === ""
+                          ? setErrorBorder()
+                          : "1px solid black"
+                      }
                       onChange={(e) =>
                         setValues({ ...values, nom: e.target.value })
                       }
@@ -229,7 +234,9 @@ const EmployeeAdd = ({ onClose }) => {
                       id="prenom"
                       required
                       border={
-                        isEmpty && values.prenom === "" && setErrorBorder()
+                        isEmpty && values.prenom === ""
+                          ? setErrorBorder()
+                          : "1px solid black"
                       }
                       onChange={(e) =>
                         setValues({ ...values, prenom: e.target.value })
@@ -244,9 +251,9 @@ const EmployeeAdd = ({ onClose }) => {
                       id="dateNaissance"
                       required
                       border={
-                        isEmpty &&
-                        values.dateNaissance === "" &&
-                        setErrorBorder()
+                        isEmpty && values.dateNaissance === ""
+                          ? setErrorBorder()
+                          : "1px solid black"
                       }
                       onChange={(e) =>
                         setValues({ ...values, dateNaissance: e.target.value })
@@ -307,7 +314,9 @@ const EmployeeAdd = ({ onClose }) => {
                         type="text"
                         id="adresse"
                         border={
-                          isEmpty && values.idPoste === "" && setErrorBorder()
+                          isEmpty && values.idPoste === ""
+                            ? setErrorBorder()
+                            : "1px solid black"
                         }
                         onChange={(e) =>
                           setValues({ ...values, adresse: e.target.value })
@@ -330,7 +339,9 @@ const EmployeeAdd = ({ onClose }) => {
                         id="email"
                         required
                         border={
-                          isEmpty && values.email === "" && setErrorBorder()
+                          isEmpty && values.email === ""
+                            ? setErrorBorder()
+                            : "1px solid black"
                         }
                         onChange={(e) =>
                           setValues({ ...values, email: e.target.value })
@@ -349,7 +360,9 @@ const EmployeeAdd = ({ onClose }) => {
                       <InputGroup
                         h={50}
                         border={
-                          isEmpty && values.tel === "" && setErrorBorder()
+                          isEmpty && values.tel === ""
+                            ? setErrorBorder()
+                            : "1px solid black"
                         }
                       >
                         <InputLeftAddon h={50}>+261</InputLeftAddon>
@@ -386,9 +399,9 @@ const EmployeeAdd = ({ onClose }) => {
                         id="dateEmbauche"
                         required
                         border={
-                          isEmpty &&
-                          values.dateEmbauche === "" &&
-                          setErrorBorder()
+                          isEmpty && values.dateEmbauche === ""
+                            ? setErrorBorder()
+                            : "1px solid black"
                         }
                         onChange={(e) =>
                           setValues({

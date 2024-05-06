@@ -18,6 +18,7 @@ import apiClient from "../../services/api-client";
 import { Link } from "react-router-dom";
 import usePdf from "../../hooks/usePdf";
 import { FaPrint } from "react-icons/fa";
+import TablePagination from "../paginations/TablePagination";
 
 const Paies = () => {
   const [paies, setPaies] = useState([]);
@@ -31,15 +32,6 @@ const Paies = () => {
     const response = await apiClient.get("/paies");
     setPaies(response.data);
   };
-
-  // const deletePaie = async (id) => {
-  //   try {
-  //     await apiClient.delete(`/paies/${id}`);
-  //     getPaies();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

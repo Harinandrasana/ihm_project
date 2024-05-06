@@ -74,7 +74,6 @@ const Deductions = () => {
     />
   );
 
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = React.useState(<OverlayOne />);
 
@@ -146,7 +145,7 @@ const Deductions = () => {
                 <Td verticalAlign="middle">{deduction.idDeduction}</Td>
                 <Td verticalAlign="middle">{deduction.design}</Td>
                 <Td verticalAlign="middle">{deduction.nomPoste}</Td>
-                <Td verticalAlign="middle">{deduction.TauxD} %</Td>
+                <Td verticalAlign="middle">{deduction.tauxD} %</Td>
                 <Td verticalAlign="middle">
                   <HStack>
                     <Container>

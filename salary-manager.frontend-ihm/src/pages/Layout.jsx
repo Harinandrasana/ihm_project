@@ -46,7 +46,7 @@ const Layout = () => {
         >
           <NavBar />
         </GridItem>
-        <GridItem area={"nav"} mt={20} position="fixed">
+        <GridItem area={"nav"} mt={20} position="fixed" zIndex={3}>
           {/* {isMobile && <RouteBar />} */}
           <Box ml={isMobile && "90%"}>
             <SideBar />

@@ -9,7 +9,12 @@ import {
   Container,
   HStack,
   Textarea,
-  Text
+  Text,
+  NumberInputField,
+  NumberInput,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import apiClient from "../../services/api-client";
@@ -38,15 +43,12 @@ const PosteAdd = ({ onClose }) => {
   const [isEmpty, setIsEmpty] = useState(false);
 
   const checkCurrentInput = () => {
-    if(
-      values.nomPoste !== "" &&
-      values.salaire !== ""
-    ){
+    if (values.nomPoste !== "" && values.salaire !== "") {
       setIsEmpty(!isEmpty);
     } else {
       setIsEmpty(true);
     }
-  }
+  };
 
   const setErrorBorder = () => {
     return "1px solid red";
@@ -63,7 +65,7 @@ const PosteAdd = ({ onClose }) => {
                 color={"!black"}
                 bg="white"
                 h={50}
-                border="1px solid black" 
+                border="1px solid black"
                 type="text"
                 id="nomPoste"
                 name="nomPoste"
@@ -74,21 +76,19 @@ const PosteAdd = ({ onClose }) => {
                 placeholder="Entrer la designation du poste"
                 _placeholder={{ color: "#8c8c8c" }}
               />
-              {
-                (isEmpty && values.nomPoste === "") && (
-                  <Text color={"red"} fontSize={14} pl="auto" >
-                    Veuiller remplire le formulaire
-                  </Text>
-                )
-              }
+              {isEmpty && values.nomPoste === "" && (
+                <Text color={"red"} fontSize={14} pl="auto">
+                  Veuiller remplire le formulaire
+                </Text>
+              )}
             </FormControl>
             <FormControl id="salaire">
               <FormLabel>Salaire</FormLabel>
-              <Input
+              <NumberInput
+                defaultValue={40000}
+                precision={2}
+                step={0.2}
                 bg="white"
-                h={50}
-                border="1px solid black"
-                type="number"
                 id="salaire"
                 name="salaire"
                 required
@@ -97,14 +97,18 @@ const PosteAdd = ({ onClose }) => {
                 }
                 placeholder="Entrer montant du salaire"
                 _placeholder={{ color: "#8c8c8c" }}
-              />
-              {
-                (isEmpty && values.salaire === "") && (
-                  <Text color={"red"} fontSize={14} pl={"auto"}>
-                    Veuiller remplire le formulaire
-                  </Text>
-                )
-              }
+              >
+                <NumberInputField height={50} />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+              {isEmpty && values.salaire === "" && (
+                <Text color={"red"} fontSize={14} pl={"auto"}>
+                  Veuiller remplire le formulaire
+                </Text>
+              )}
             </FormControl>
             <FormControl id="commmentaire">
               <FormLabel>Description</FormLabel>
@@ -127,7 +131,12 @@ const PosteAdd = ({ onClose }) => {
                     Annuler
                   </Button>
                 </Link>
-                <Button onClick={checkCurrentInput} p={7} type="submit" bg="green">
+                <Button
+                  onClick={checkCurrentInput}
+                  p={7}
+                  type="submit"
+                  bg="green"
+                >
                   Valider
                 </Button>
               </HStack>

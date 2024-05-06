@@ -1,25 +1,21 @@
 import React from "react";
-import BarChartComponent from "../components/graph/BachartComponent";
 import Employee from "../components/employes/Employee";
 import {
   Box,
-  HStack,
   Container,
   SimpleGrid,
   GridItem,
   Grid,
   Center,
-  Progress,
   Stack,
-  Checkbox,
   Text,
   Divider,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import PieChartComponent from "../components/graph/CustomToltip";
-import Deduction from "../components/employes/Deduction";
+import Deduction from "../components/deductions/Deduction";
 import ActionButton from "../components/employes/ActionButton";
 import PaieStatus from "../components/paies/PaieStatus";
+import AvantageCheckBox from "../components/avantages/AvantageCheckBox";
 
 const EmployeeDetails = () => {
   const { employeeId: employeeId } = useParams();
@@ -47,26 +43,8 @@ const EmployeeDetails = () => {
                     <PaieStatus employeeId={employeeId} />
                   </Center>
                 </Box>
-                <Box
-                  mt={5}
-                  borderLeft={"1px solid #d7d7d7"}
-                  pl={5}
-                  rounded={16}
-                >
-                  <Text fontSize={21}>Cas d'avantages: </Text>
-                  <Divider />
-                  <Checkbox colorScheme="red" defaultChecked mt={5}>
-                    Congés payés
-                  </Checkbox>
-                  <Divider />
-                  <Checkbox colorScheme="green" defaultChecked mt={5}>
-                    Congés non payé
-                  </Checkbox>
-                  <Divider />
-                  <Checkbox colorScheme="green" defaultChecked mt={5}>
-                    Congés partielle
-                  </Checkbox>
-                  <Divider />
+                <Box>
+                  <AvantageCheckBox />
                 </Box>
               </Stack>
             </Box>

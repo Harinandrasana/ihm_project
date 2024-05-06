@@ -1,24 +1,14 @@
 import React, { useState } from "react";
-import {
-  Box,
-  List,
-  ListItem,
-  Stack,
-  Text,
-  HStack,
-  Divider,
-  Button,
-} from "@chakra-ui/react";
+import { Box, List, ListItem, Stack, Button } from "@chakra-ui/react";
 import { Icon } from "@chakra-ui/react";
-import { AiOutlineHome } from "react-icons/ai";
-import {
-  FaBriefcase,
-  FaMoneyCheckAlt,
-  FaMinusCircle,
-  FaBars,
-} from "react-icons/fa";
+import { FaBriefcase, FaMoneyCheckAlt, FaMinusCircle } from "react-icons/fa";
 import { BiGroup } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Accueil from "./sideMenu/Accueil";
+import Deductions from "./sideMenu/Deductions";
+import Paies from "./sideMenu/Paies";
+import Employees from "./sideMenu/Employees";
+import Postes from "./sideMenu/Postes";
 
 const SideMenu = () => {
   const [activeItem, setActiveItem] = useState(null);
@@ -44,145 +34,35 @@ const SideMenu = () => {
       bg={"#1e2530"}
     >
       <Stack mt={0} mx="auto">
-        {/* <HStack textAlign="center" mt={10} pl={9}>
-          <Icon as={FaBars} boxSize={10} />
-          <Text fontSize={30}>Menu</Text>
-        </HStack> */}
-        {/* <Divider textAlign="center" pl={5} /> */}
         <List>
           <ListItem
             mt={10}
-            mb={6}
             border="hidden"
             rounded={15}
             onMouseDown={() => handleItemClick("Accueil")}
           >
             <Link to="/">
-              <Button
-                bg="none"
-                verticalAlign="middle"
-                mt={20}
-                color="white"
-                fontSize={22}
-                {...(activeItem === "Accueil" && {
-                  color: "#bcc0c3",
-                  fontWeight: 500,
-                  transform: "scale(1.5)",
-                })}
-                _hover={{
-                  transform: "scale(1.3)",
-                  transition: "transform .15s ease-in",
-                }}
-              >
-                <Icon as={AiOutlineHome} boxSize={10} />
-                {/* <Text ml={6} mt={2}>
-                  Accueil
-                </Text> */}
-              </Button>
+              <Accueil itemName="Accueil" />
             </Link>
           </ListItem>
-          <ListItem
-            mt={8}
-            mb={6}
-            onMouseDown={() => handleItemClick("Employes")}
-          >
+          <ListItem onMouseDown={() => handleItemClick("Employes")}>
             <Link to="/employees">
-              <Button
-                bg="none"
-                verticalAlign="middle"
-                color="white"
-                fontSize={22}
-                {...(activeItem === "Employes" && {
-                  color: "#bcc0c3",
-                  fontWeight: 500,
-                  transform: "scale(1.5)",
-                })}
-                _hover={{
-                  transform: "scale(1.3)",
-                  transition: "transform .15s ease-in",
-                }}
-              >
-                <Icon as={BiGroup} boxSize={10} />
-                {/* <Text ml={6} mt={2}>
-                  Employes
-                </Text> */}
-              </Button>
+              <Employees itemName="Employes" />
             </Link>
           </ListItem>
-          <ListItem mt={8} mb={6} onMouseDown={() => handleItemClick("Postes")}>
+          <ListItem onMouseDown={() => handleItemClick("Postes")}>
             <Link to="/postes">
-              <Button
-                bg="none"
-                verticalAlign="middle"
-                color="white"
-                fontSize={22}
-                {...(activeItem === "Postes" && {
-                  color: "#bcc0c3",
-                  fontWeight: 500,
-                  transform: "scale(1.5)",
-                })}
-                _hover={{
-                  transform: "scale(1.3)",
-                  transition: "transform .15s ease-in",
-                }}
-              >
-                <Icon as={FaBriefcase} boxSize={10} />
-                {/* <Text ml={6} mt={2}>
-                  Postes
-                </Text> */}
-              </Button>
+              <Postes />
             </Link>
           </ListItem>
-          <ListItem
-            mt={8}
-            mb={6}
-            onMouseDown={() => handleItemClick("Deductions")}
-          >
+          <ListItem onMouseDown={() => handleItemClick("Deductions")}>
             <Link to="/deductions">
-              <Button
-                bg="none"
-                verticalAlign="middle"
-                color="white"
-                fontSize={22}
-                {...(activeItem === "Deductions" && {
-                  color: "#bcc0c3",
-                  fontWeight: 500,
-                  transform: "scale(1.5)",
-                })}
-                _hover={{
-                  transform: "scale(1.3)",
-                  transition: "transform .15s ease-in",
-                }}
-              >
-                <Icon as={FaMinusCircle} boxSize={10} />
-                {/* <Text ml={6} mt={2}>
-                  Deductions
-                </Text> */}
-              </Button>
+              <Deductions />
             </Link>
           </ListItem>
-          <ListItem mt={8} mb={6} onMouseDown={() => handleItemClick("Paies")}>
+          <ListItem onMouseDown={() => handleItemClick("Paies")}>
             <Link to="/paies">
-              <Button
-                bg="none"
-                verticalAlign="middle"
-                color="white"
-                fontSize={22}
-                {...(activeItem === "Paies" && {
-                  color: "#bcc0c3",
-                  fontWeight: 500,
-                  transform: "scale(1.5)",
-                })}
-                _hover={{
-                  transform: "scale(1.3)",
-                  transition: "transform .15s ease-in",
-                }}
-              >
-                <Icon as={FaMoneyCheckAlt} boxSize={10} />
-                {/* <Text ml={6} mt={2}>
-                  Paies
-                </Text> */}
-              </Button>
+              <Paies />
             </Link>
           </ListItem>
         </List>

@@ -11,6 +11,7 @@ import { connectedUser } from "./hooks/useUsers";
 import ErrorPage from "./pages/ErrorPage";
 import EmployeeDetails from "./pages/EmployeeDetails";
 import ConnectionPage from "./pages/ConnectionPage";
+import TestPage from "./components/TestPage";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { path: "paies", element: <Paies /> },
       { path: "params", element: <Parametters /> },
       { path: "help", element: <Helps /> },
+      { path: "test", element: <TestPage /> },
     ],
   },
 ]);
