@@ -9,6 +9,7 @@ import {
   Container,
   HStack,
   Textarea,
+  Text
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import apiClient from "../../services/api-client";
@@ -17,6 +18,17 @@ import useNotification from "../../hooks/useNotification";
 const PosteEdit = ({ posteId, onClose }) => {
   const [poste, setPoste] = useState(null);
   const { displayToast } = useNotification();
+  const [isEmpty, setIsEmpty] = useState(false);
+
+  const checkCurrentInput = () => {
+    if(
+      poste.nomPoste !== "" &&
+      poste.salaire !== ""
+    ) {
+      setIsEmpty(!isEmpty);
+    } else setIsEmpty(true);
+
+  }
 
   useEffect(() => {
     getPosteById();
@@ -55,7 +67,7 @@ const PosteEdit = ({ posteId, onClose }) => {
       <Box>
         <form onSubmit={handleSubmit}>
           <Stack>
-            <FormControl id="nomPoste">
+            <FormControl id="nomPoste" isRequired>
               <FormLabel>Designation</FormLabel>
               <Input
                 bg="white"
@@ -70,8 +82,13 @@ const PosteEdit = ({ posteId, onClose }) => {
                 value={poste.nomPoste}
                 onChange={handleChange}
               />
+              {(isEmpty && poste.nomPoste === "") && (
+                <Text color={"red"} fontSize={14} pl={"auto"}>
+                  Veuiller donner un nom de poste
+                </Text>
+              )}
             </FormControl>
-            <FormControl id="salaire">
+            <FormControl id="salaire" isRequired>
               <FormLabel>Salaire</FormLabel>
               <Input
                 bg="white"
@@ -86,6 +103,11 @@ const PosteEdit = ({ posteId, onClose }) => {
                 value={poste.salaire}
                 onChange={handleChange}
               />
+              {(isEmpty && poste.salaire === "") && (
+                <Text color={"red"} fontSize={14} pl={"auto"}>
+                  Veuiller rajouter un salaire
+                </Text>
+              )}
             </FormControl>
             <FormControl id="commentaire">
               <FormLabel>Description</FormLabel>
@@ -109,7 +131,7 @@ const PosteEdit = ({ posteId, onClose }) => {
                     Annuler
                   </Button>
                 </Link>
-                <Button p={7} type="submit" bg="green">
+                <Button p={7} onClick={checkCurrentInput} type="submit" bg="green">
                   Valider
                 </Button>
               </HStack>

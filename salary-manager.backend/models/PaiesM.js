@@ -5,7 +5,7 @@ const db = require("../connectionDB/db");
 class Paie {
 
     static async getAll(callback) {
-        db.query("SELECT * FROM salary_manager.paies;", (err, result) => {
+        db.query("SELECT * FROM salary_manager.paies ORDER BY paies.idPaie DESC", (err, result) => {
             if (err) {
                 callback(err, null);
                 return;

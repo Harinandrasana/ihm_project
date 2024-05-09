@@ -108,22 +108,45 @@ const EmployeeAdd = ({ onClose }) => {
     return "1px solid red";
   };
 
-  const formatPhoneNumber = (input) => {
-    const cleaned = ("" + input).replace(/\D/g, "");
-    const countryCode = "+261";
-    const areaCode = cleaned.slice(0, 3); // Madagascar a un indicatif régional à 3 chiffres
-    const firstSegment = cleaned.slice(3, 5);
-    const secondSegment = cleaned.slice(5, 7);
-    const thirdSegment = cleaned.slice(7, 9);
-    const fourthSegment = cleaned.slice(9); // Ajustement pour le quatrième segment
-    return `${countryCode}-${areaCode}-${firstSegment}-${secondSegment}-${thirdSegment}-${fourthSegment}`;
+  // const formatPhoneNumber = (input) => {
+  //   const cleaned = ("" + input).replace(/\D/g, "");
+  //   const countryCode = "+261";
+  //   const areaCode = cleaned.slice(0, 3); // Madagascar a un indicatif régional à 3 chiffres
+  //   const firstSegment = cleaned.slice(3, 5);
+  //   const secondSegment = cleaned.slice(5, 7);
+  //   const thirdSegment = cleaned.slice(7, 9);
+  //   const fourthSegment = cleaned.slice(9); // Ajustement pour le quatrième segment
+  //   return `${countryCode}-${areaCode}-${firstSegment}-${secondSegment}-${thirdSegment}-${fourthSegment}`;
+  // };
+  const [phone, setPhone]=useState("");
+
+  const handleChange = (event)=>{
+      const input=event.target.value;
+      const numeicInput=input.replace(/\D/g,'');
+      let formattedPhoneNumber="+216";
+      if (numeicInput.length>3){
+          formattedPhoneNumber += ' ' + numeicInput.substr(3,2);
+      }
+      if (numeicInput.length>5){
+          formattedPhoneNumber += ' ' + numeicInput.substr(5,2);
+      }
+      if (numeicInput.length>7){
+          formattedPhoneNumber += ' ' + numeicInput.substr(7,3);
+      }
+
+      if (numeicInput.length>10){
+          formattedPhoneNumber += ' ' + numeicInput.substr(10,2);
+      }
+
+      setPhone(formattedPhoneNumber);
+
   };
 
-  const handlePhoneNumberChange = (e) => {
-    const formattedPhoneNumber = formatPhoneNumber(e.target.value);
-    setPhoneNumber(formattedPhoneNumber);
-    setValues({ ...values, tel: formattedPhoneNumber });
-  };
+  // const handlePhoneNumberChange = (e) => {
+  //   const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+  //   setPhoneNumber(formattedPhoneNumber);
+  //   setValues({ ...values, tel: formattedPhoneNumber });
+  // };
 
   return (
     <Container color="black" maxW="full" rounded={21} textAlign="center">
@@ -161,7 +184,7 @@ const EmployeeAdd = ({ onClose }) => {
                         display="none"
                       />
                       {isEmpty && values.image_url === 0 && (
-                        <Text color={"red"} fontSize={10} pr={"10%"} pl={"20%"}>
+                        <Text color={"red"} fontSize={13} mx="auto">
                           Veuller selectionner une image
                         </Text>
                       )}
@@ -192,7 +215,7 @@ const EmployeeAdd = ({ onClose }) => {
                       ))}
                     </Select>
                     {isEmpty && values.idPoste === 0 && (
-                      <Text color={"red"} fontSize={10} pr={130}>
+                      <Text color={"red"} fontSize={14} mx="auto">
                         Veuller selectionner un poste
                       </Text>
                     )}
@@ -214,7 +237,7 @@ const EmployeeAdd = ({ onClose }) => {
                       _placeholder={{ color: "#8c8c8c" }}
                     />
                     {isEmpty && values.nom === "" && (
-                      <Text color={"red"} fontSize={10} pl={"auto"} pr={"50%"}>
+                      <Text color={"red"} fontSize={14} pl={"auto"} margin={"auto"}>
                         Veuiller inserer le nom !
                       </Text>
                     )}
@@ -226,10 +249,10 @@ const EmployeeAdd = ({ onClose }) => {
                       h={50}
                       type="text"
                       id="prenom"
-                      required
-                      border={
-                        isEmpty && values.prenom === "" && setErrorBorder()
-                      }
+                      // required
+                      // border={
+                      //   isEmpty && values.prenom === "" && setErrorBorder()
+                      // }
                       onChange={(e) =>
                         setValues({ ...values, prenom: e.target.value })
                       }
@@ -259,7 +282,7 @@ const EmployeeAdd = ({ onClose }) => {
                       max={minDate.toISOString().split("T")[0]}
                     />
                     {isEmpty && values.dateNaissance === "" && (
-                      <Text color={"red"} fontSize={10} pr={130}>
+                      <Text color={"red"} fontSize={14} mx="auto">
                         Veuller selectionner une date
                       </Text>
                     )}
@@ -315,7 +338,7 @@ const EmployeeAdd = ({ onClose }) => {
                         _placeholder={{ color: "#8c8c8c" }}
                       />
                       {isEmpty && values.adresse === "" && (
-                        <Text color={"red"} fontSize={10} pr={130}>
+                        <Text color={"red"} fontSize={14} mx="auto">
                           Veuller inserer une adresse
                         </Text>
                       )}
@@ -338,7 +361,7 @@ const EmployeeAdd = ({ onClose }) => {
                         _placeholder={{ color: "#8c8c8c" }}
                       />
                       {isEmpty && values.email === "" && (
-                        <Text color={"red"} fontSize={10} pr={130}>
+                        <Text color={"red"} fontSize={14} mx="auto">
                           Veuller selectionner une email
                         </Text>
                       )}
@@ -353,16 +376,16 @@ const EmployeeAdd = ({ onClose }) => {
                           h={50}
                           type="tel"
                           required
-                          border={
-                            isEmpty && values.tel === "" && setErrorBorder()
-                          }
+                          // border={
+                          //   isEmpty && values.tel === "" && setErrorBorder()
+                          // }
                           placeholder="+261-XX-XX-XXX-XX"
-                          value={phoneNumber}
-                          onChange={handlePhoneNumberChange}
+                          value={phone}
+                          onChange={handleChange}
                         />
                       </InputGroup>
                       {isEmpty && values.tel === "" && (
-                        <Text color={"red"} fontSize={10} pr={100}>
+                        <Text color={"red"} fontSize={14} mx="auto">
                           Veuller inserer le numero de telephone
                         </Text>
                       )}
@@ -390,9 +413,17 @@ const EmployeeAdd = ({ onClose }) => {
                         h={50}
                         type="date"
                         max={new Date().toISOString().split("T")[0]} // Bloquer les dates après aujourd'hui
+                        disabled={
+                          new Date().getDay() === 0 || new Date().getDay() === 6
+                        } // Désactiver les samedis et dimanches
+                        color={
+                          new Date().getDay() === 0 || new Date().getDay() === 6
+                            ? "red"
+                            : ""
+                        } // Colorer en rouge les samedis et dimanches
                       />
                       {isEmpty && values.dateEmbauche === "" && (
-                        <Text color={"red"} fontSize={10} pr={130}>
+                        <Text color={"red"} fontSize={14} mx="auto">
                           Veuller selectionner une date
                         </Text>
                       )}

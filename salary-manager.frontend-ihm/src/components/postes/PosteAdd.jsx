@@ -9,6 +9,7 @@ import {
   Container,
   HStack,
   Textarea,
+  Text
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import apiClient from "../../services/api-client";
@@ -34,12 +35,25 @@ const PosteAdd = ({ onClose }) => {
       .catch((err) => console.log(err));
   }
 
+  const [isEmpty, setIsEmpty] = useState(false);
+
+  const checkCurrentInput = () => {
+    if(
+      values.nomPoste !== "" &&
+      values.salaire !== ""
+    ){
+      setIsEmpty(!isEmpty);
+    } else {
+      setIsEmpty(true);
+    }
+  }
+
   return (
     <Container color="black" maxW="full" rounded={21} textAlign="center">
       <Box>
         <form onSubmit={handleSubmit}>
           <Stack>
-            <FormControl id="nomPoste">
+            <FormControl id="nomPoste" isRequired>
               <FormLabel>Designation</FormLabel>
               <Input
                 color={"!black"}
@@ -55,8 +69,15 @@ const PosteAdd = ({ onClose }) => {
                 placeholder="Entrer la designation du poste"
                 _placeholder={{ color: "#8c8c8c" }}
               />
+              {
+                (isEmpty && values.nomPoste === "") && (
+                  <Text color={"red"} fontSize={14} pl="auto" >
+                    Veuiller remplire le formulaire
+                  </Text>
+                )
+              }
             </FormControl>
-            <FormControl id="salaire">
+            <FormControl id="salaire" isRequired>
               <FormLabel>Salaire</FormLabel>
               <Input
                 bg="white"
@@ -71,6 +92,13 @@ const PosteAdd = ({ onClose }) => {
                 placeholder="Entrer montant du salaire"
                 _placeholder={{ color: "#8c8c8c" }}
               />
+              {
+                (isEmpty && values.salaire === "") && (
+                  <Text color={"red"} fontSize={14} pl={"auto"}>
+                    Veuiller specifier une salaire
+                  </Text>
+                )
+              }
             </FormControl>
             <FormControl id="commmentaire">
               <FormLabel>Description</FormLabel>
@@ -93,7 +121,7 @@ const PosteAdd = ({ onClose }) => {
                     Annuler
                   </Button>
                 </Link>
-                <Button p={7} type="submit" bg="green">
+                <Button p={7} onClick={checkCurrentInput} type="submit" bg="green">
                   Valider
                 </Button>
               </HStack>

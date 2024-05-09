@@ -12,6 +12,7 @@ router.get('/allE', EmployeC.getAllEmployees);
 router.get('/oneE/:id', EmployeC.getEmployeById);
 router.delete('/delE/:id', EmployeC.deleteEmploye);
 router.put('/updateE/:id', EmployeC.updateEmploye);
+router.get('/count', EmployeC.countEmploye);
 
 //route pour tous les traitement de POSTE
 router.get('/allP', PosteControlleur.getAllPoste);
@@ -20,6 +21,7 @@ router.get('/oneP/:id', PosteControlleur.getPosteById);
 router.delete('/delP/:id', PosteControlleur.deletePoste);
 router.put('/updateP/:id', PosteControlleur.updatePoste);
 router.get('/idNomP', PosteControlleur.selectIdNomPoste);
+router.get('/countP', PosteControlleur.countPostes);
 
 //route pour tous les traitement de DEDUCTION
 router.get('/allD', DeductionControlleur.getAllDeduction);
@@ -28,6 +30,7 @@ router.get('/oneD/:id', DeductionControlleur.getDeductionById);
 router.put('/updateD/:id', DeductionControlleur.updateDeduction);
 router.delete('/delD/:id', DeductionControlleur.deleteDeduction);
 router.get('/deductions/postes/:id', DeductionControlleur.getDeductionEmploye);
+router.get('/countD', DeductionControlleur.countDeductions);
 
 //route pour tous les traitement des AVANTAGES
 router.post('/addA', AvantageControlleur.addNewAvantage);

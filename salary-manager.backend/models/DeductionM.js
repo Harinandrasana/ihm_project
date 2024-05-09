@@ -4,7 +4,7 @@ class Deductions {
 
     static async allDeduction() {
         return new Promise(resolve => {
-            db.query("SELECT *, nomPoste FROM deductions LEFT JOIN postes ON deductions.idPoste = postes.idPoste ORDER BY deductions.idPoste", (err, result) => {
+            db.query("SELECT *, nomPoste FROM deductions LEFT JOIN postes ON deductions.idPoste = postes.idPoste ORDER BY deductions.idDeduction DESC", (err, result) => {
                 if (!err)
                     resolve(result);
             });
@@ -55,6 +55,17 @@ class Deductions {
                     resolve(result);
             });
         });
+    }
+
+    
+    static async countDeduction() {
+        return new Promise(resolve => {
+            db.query("SELECT COUNT(*) AS nbTotalDeduction FROM deductions",
+            (err, result) => {
+                if(!err)
+                    resolve(result);
+            })
+        })
     }
 };
 

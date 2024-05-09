@@ -53,6 +53,16 @@ class PosteControlleur {
         res.json(data);
     }
 
+    static async countPostes(req, res) {
+        try {
+            const result = await Postes.countPoste();
+            res.json(result);
+        } catch (error) {
+            res.json(error)
+            console.log(error);
+        }
+    }
+
 };
 
 module.exports= PosteControlleur;

@@ -32,22 +32,22 @@ const Paies = () => {
     setPaies(response.data);
   };
 
-  const deletePaie = async (id) => {
-    try {
-      await apiClient.delete(`/paies/${id}`);
-      getPaies();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const deletePaie = async (id) => {
+  //   try {
+  //     await apiClient.delete(`/paies/${id}`);
+  //     getPaies();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <Box>
-      <Link to="/paies/add">
+      {/* <Link to="/paies/add">
         <Button leftIcon={<AddIcon />} bg="#30e9a8" mb={5}>
           Ajouter des paies
         </Button>
-      </Link>
+      </Link> */}
       <TableContainer
         mr={10}
         pt={2}

@@ -57,6 +57,15 @@ class DeductionControlleur {
             res.json(data);
     }
 
+    static async countDeductions(req, res) {
+        try {
+            const result = await Deductions.countDeduction();
+            res.json(result);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
 module.exports = DeductionControlleur;
 

@@ -4,7 +4,7 @@ class Postes {
 
     static async getAll() {
         return new Promise(resolve => {
-            db.query("SELECT * FROM postes", [], (err, result) => {
+            db.query("SELECT * FROM postes ORDER BY idPoste DESC", [], (err, result) => {
                 if (!err)
                     resolve(result);
             })
@@ -67,6 +67,15 @@ class Postes {
                     resolve(true)
             });
         });
+    }
+
+    static async countPoste() {
+        return new Promise(resolve => {
+            db.query("SELECT COUNT(*) AS nbTotalPoste FROM postes", (err, result) => {
+                if(!err)
+                    resolve(result)
+            })
+        })
     }
 
 };
