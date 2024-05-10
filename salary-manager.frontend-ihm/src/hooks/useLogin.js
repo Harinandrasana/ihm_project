@@ -6,11 +6,11 @@ const useLogin = () => {
 
     const login = async (values) => {
         const response = await apiClient
-            .post("/users/login", values)
+            .post("/login", values)
             .then((res) => {
-                console.log("the response", res.data.userId);
+                console.log("the response", res.data.identifiant);
                 if (res.data) {
-                    localStorage.setItem("users", res.data.userId)
+                    localStorage.setItem("users", res.data.identifiant)
                     window.location.reload();
                 }
             })

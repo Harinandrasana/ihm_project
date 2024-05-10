@@ -6,7 +6,7 @@ const useRegister = () => {
 
     const register = async (values) => {
         const response = await apiClient
-            .post("/users", values)
+            .post("/users/addLog", values)
             .then((res) => {
             })
             .catch((err) => console.log(err));

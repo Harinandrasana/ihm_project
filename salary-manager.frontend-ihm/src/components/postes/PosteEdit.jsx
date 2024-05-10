@@ -9,11 +9,7 @@ import {
   Container,
   HStack,
   Textarea,
-<<<<<<< HEAD
   Text
-=======
-  Text,
->>>>>>> sedra
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import apiClient from "../../services/api-client";
@@ -23,19 +19,6 @@ const PosteEdit = ({ posteId, onClose }) => {
   const [poste, setPoste] = useState(null);
   const { displayToast } = useNotification();
   const [isEmpty, setIsEmpty] = useState(false);
-<<<<<<< HEAD
-
-  const checkCurrentInput = () => {
-    if(
-      poste.nomPoste !== "" &&
-      poste.salaire !== ""
-    ) {
-      setIsEmpty(!isEmpty);
-    } else setIsEmpty(true);
-
-  }
-=======
->>>>>>> sedra
 
   useEffect(() => {
     getPosteById();
@@ -148,11 +131,11 @@ const PosteEdit = ({ posteId, onClose }) => {
                     Annuler
                   </Button>
                 </Link>
-<<<<<<< HEAD
-                <Button p={7} onClick={checkCurrentInput} type="submit" bg="green">
-=======
+
+                {/* <Button p={7} onClick={checkCurrentInput} type="submit" bg="green"> */}
+
                 <Button onClick={checkCurrentInput} p={7} type="submit" bg="green">
->>>>>>> sedra
+
                   Valider
                 </Button>
               </HStack>

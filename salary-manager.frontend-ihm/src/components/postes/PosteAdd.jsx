@@ -48,13 +48,11 @@ const PosteAdd = ({ onClose }) => {
     }
   }
 
-<<<<<<< HEAD
-=======
   const setErrorBorder = () => {
     return "1px solid red";
   };
 
->>>>>>> sedra
+
   return (
     <Container color="black" maxW="full" rounded={21} textAlign="center">
       <Box>
@@ -104,11 +102,8 @@ const PosteAdd = ({ onClose }) => {
               {
                 (isEmpty && values.salaire === "") && (
                   <Text color={"red"} fontSize={14} pl={"auto"}>
-<<<<<<< HEAD
                     Veuiller specifier une salaire
-=======
-                    Veuiller remplire le formulaire
->>>>>>> sedra
+
                   </Text>
                 )
               }
@@ -134,11 +129,9 @@ const PosteAdd = ({ onClose }) => {
                     Annuler
                   </Button>
                 </Link>
-<<<<<<< HEAD
-                <Button p={7} onClick={checkCurrentInput} type="submit" bg="green">
-=======
+   {/* <Button p={7} onClick={checkCurrentInput} type="submit" bg="green"> */}
+
                 <Button onClick={checkCurrentInput} p={7} type="submit" bg="green">
->>>>>>> sedra
                   Valider
                 </Button>
               </HStack>

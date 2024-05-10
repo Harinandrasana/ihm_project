@@ -14,16 +14,19 @@ class UsersController {
     }
 
     static async Authentification(req, res) {
-        const identifient = req.body.identifient;
-        const passWord = req.body.passWord;
+        
+        try {
+            const identifiant = req.body.identifient;
+            const password = req.body.passWord;
 
-        const result = await Users.Login(identifient, passWord)
-        if(result)
-            
-            res.json({ms: "Information valide"});
-        else{
-            res.json({nsg: "erreur"});
-            console.log("fausse information");
+            const result = await Users.Login(identifiant, password);
+            if(result) {
+                res.json({msg: "Information valide"})
+            }
+            res.json({msg: "fausse information"});    
+        } catch (error) {
+            res.json(error)
+            console.log(error)
         }
     }
 

@@ -21,23 +21,33 @@ const Login = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const [values, setValues] = useState({
-    userId: "",
+    identifiant: "",
     password: "",
   });
   const { login } = useLogin();
   const { register } = useRegister();
 
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isSignUp) {
-      login(values);
+
+    if(
+      values.identifiant !== "" &&
+      values.password !== ""
+    ){
+      setIsEmpty(!isEmpty);
     } else {
-      const success = register(values);
-      if (success) {
-        await login(values);
+      setIsEmpty(true);
+      if (!isSignUp) {
+        login(values);
       } else {
+        const success = register(values);
+        if (success) {
+          await login(values);
+        } else {
+        }
       }
     }
   };
@@ -64,22 +74,29 @@ const Login = () => {
       <Box border="hidden" p={2}>
         <form onSubmit={handleSubmit}>
           <Stack spacing={3}>
-            <FormControl id="userId">
+            <FormControl id="identifiant">
               <FormLabel fontSize={25}>Identiant</FormLabel>
               <Input
                 bg="white"
                 h={50}
                 type="number"
-                id="userId"
+                id="identifiant"
                 placeholder="Votre identifiant"
                 border="1px solid black"
                 _active={{ border: "1px solid black" }}
                 _placeholder={{ color: "#8c8c8c" }}
                 required
                 onChange={(e) =>
-                  setValues({ ...values, userId: e.target.value })
+                  setValues({ ...values, identifiant: e.target.value })
                 }
               />
+              {
+                (isEmpty && values.identifiant === "") && (
+                  <Text color={"red"} fontSize={14} pl="auto" >
+                    Veuiller remplire le formulaire
+                  </Text>
+                )
+              }
             </FormControl>
             <FormControl id="password">
               <FormLabel fontSize={25}>Mot de passe</FormLabel>
@@ -97,6 +114,13 @@ const Login = () => {
                   placeholder="Votre mot de passe"
                   _placeholder={{ color: "#8c8c8c" }}
                 />
+                {
+                (isEmpty && values.password === "") && (
+                  <Text color={"red"} fontSize={14} pl="auto" >
+                    Veuiller remplire le formulaire
+                  </Text>
+                )
+              }
                 <InputRightElement width="4.5rem">
                   <Button h="1.75rem" size="sm" onClick={handleClick} pt={2}>
                     {show ? (

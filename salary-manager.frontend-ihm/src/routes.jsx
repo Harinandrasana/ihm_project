@@ -15,7 +15,7 @@ import ConnectionPage from "./pages/ConnectionPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: connectedUser ? <ConnectionPage /> : <Layout />,
+    element: connectedUser ? < ConnectionPage /> : < Layout/>,
     errorElement: <ErrorPage />,
     children: [
       {
