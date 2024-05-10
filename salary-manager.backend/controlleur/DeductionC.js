@@ -31,7 +31,7 @@ class DeductionControlleur {
         const id = req.params.id;
         const idPoste = req.body.idPoste;
         const nom = req.body.design;
-        const taux = req.body.tauxD;
+        const taux = req.body.TauxD;
         console.log("idPoste", idPoste)
 
         const data = await Deductions.editDeduction(id, idPoste, nom, taux);

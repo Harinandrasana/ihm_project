@@ -8,7 +8,11 @@ import {
   Container,
   HStack,
   Select,
+<<<<<<< HEAD
   Text
+=======
+  Text,
+>>>>>>> sedra
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import apiClient from "../../services/api-client";
@@ -30,6 +34,10 @@ const DeductionEdit = ({ deductionId, onClose }) => {
     } else {
       setIsEmpty (true);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> sedra
   }
 
   useEffect(() => {
@@ -75,6 +83,7 @@ const DeductionEdit = ({ deductionId, onClose }) => {
         <form onSubmit={handleSubmit}>
           <HStack spacing={15} textAlign="center" ml="auto" mr="auto">
             <Box>
+<<<<<<< HEAD
               <FormControl isRequired>
                 <FormLabel>Poste</FormLabel>
                 <Box bg="white" rounded={4}>
@@ -100,6 +109,31 @@ const DeductionEdit = ({ deductionId, onClose }) => {
                 </Box>
               </FormControl>
               <FormControl id="design" isRequired>
+=======
+              <FormLabel>Poste</FormLabel>
+              <Box bg="white" rounded={4}>
+                <Select
+                  placeholder="Select option"
+                  _placeholder={{ color: "#8c8c8c" }}
+                  h={50}
+                  name="idPoste"
+                  value={deduction.idPoste}
+                  onChange={handleChange}
+                >
+                  {postes.map((poste) => (
+                    <option key={poste.idPoste} value={poste.idPoste}>
+                      {poste.nomPoste}
+                    </option>
+                  ))}
+                </Select>
+                {(isEmpty && deduction.idPoste === 0) && (
+                  <Text color={"red"} fontSize={14} pl={'auto'}>
+                    Veuiller selection un Poste
+                  </Text>
+                )}
+              </Box>
+              <FormControl id="design">
+>>>>>>> sedra
                 <FormLabel>Designation</FormLabel>
                 <Input
                   bg="white"
@@ -122,7 +156,11 @@ const DeductionEdit = ({ deductionId, onClose }) => {
               </FormControl>
             </Box>
             <Box>
+<<<<<<< HEAD
               <FormControl id="TauxD" isRequired>
+=======
+              <FormControl id="TauxD">
+>>>>>>> sedra
                 <FormLabel>Taux à déduire</FormLabel>
                 <Input
                   bg="white"
@@ -151,7 +189,11 @@ const DeductionEdit = ({ deductionId, onClose }) => {
                       Annuler
                     </Button>
                   </Link>
+<<<<<<< HEAD
                   <Button p={7} onClick={checkCurrentInput} type="submit" bg="green">
+=======
+                  <Button onClick={checkCurrentInput} p={7} type="submit" bg="green">
+>>>>>>> sedra
                     Valider
                   </Button>
                 </HStack>

@@ -18,7 +18,7 @@ import useLogin from "../../hooks/useLogin";
 import useRegister from "../../hooks/useRegister";
 
 const Login = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const [values, setValues] = useState({
     userId: "",

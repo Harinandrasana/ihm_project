@@ -9,7 +9,11 @@ import {
   Container,
   HStack,
   Select,
+<<<<<<< HEAD
   Text
+=======
+  Text,
+>>>>>>> sedra
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import apiClient from "../../services/api-client";
@@ -24,6 +28,7 @@ const DeductionAdd = ({ onClose }) => {
   });
   const { displayToast } = useNotification();
   const [postes, setPostes] = useState([]);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -45,8 +50,11 @@ const DeductionAdd = ({ onClose }) => {
     setPostes(response.data);
   };
 
+<<<<<<< HEAD
   const [isEmpty, setIsEmpty] = useState(false);
 
+=======
+>>>>>>> sedra
   const checkCurrentInput = () => {
     if(
       values.idPoste !== 0 &&
@@ -64,6 +72,7 @@ const DeductionAdd = ({ onClose }) => {
       <Box>
         <form onSubmit={handleSubmit}>
           <Stack>
+<<<<<<< HEAD
             <FormControl isRequired >
               <FormLabel>Poste</FormLabel>
               <Box bg="white" rounded={4}>
@@ -93,6 +102,34 @@ const DeductionAdd = ({ onClose }) => {
             </FormControl>
             
             <FormControl id="design" isRequired>
+=======
+            <FormLabel>Poste</FormLabel>
+            <Box bg="white" rounded={4}>
+              <Select
+                placeholder="Selectionner poste"
+                h={50}
+                _placeholder={{ color: "#8c8c8c" }}
+                onChange={(e) =>
+                  setValues({
+                    ...values,
+                    idPoste: parseInt(e.target.value),
+                  })
+                }
+              >
+                {postes.map((poste) => (
+                  <option key={poste.idPoste} value={poste.idPoste}>
+                    {poste.nomPoste}
+                  </option>
+                ))}
+              </Select>
+              {(isEmpty && values.idPoste === 0) && (
+                <Text color={"red"} fontSize={14} pl={"auto"} >
+                  Veuiller selection un Poste
+                </Text>
+              )}
+            </Box>
+            <FormControl id="design">
+>>>>>>> sedra
               <FormLabel>Designation</FormLabel>
               <Input
                 color={"!black"}
@@ -142,7 +179,11 @@ const DeductionAdd = ({ onClose }) => {
                     Annuler
                   </Button>
                 </Link>
+<<<<<<< HEAD
                 <Button p={7} onClick={checkCurrentInput} type="submit" bg="green">
+=======
+                <Button onClick={checkCurrentInput} p={7} type="submit" bg="green">
+>>>>>>> sedra
                   Valider
                 </Button>
               </HStack>
