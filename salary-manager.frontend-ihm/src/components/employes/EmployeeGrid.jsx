@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import apiClient from "../../services/api-client";
 import getCroppedImageUrl from "../../services/image-url";
+import empimg from "../../assets/no-image-placeholder.webp";
 import { Link } from "react-router-dom";
 
 const EmployeeGrid = () => {
@@ -27,6 +28,16 @@ const EmployeeGrid = () => {
       console.error(error);
     }
   };
+
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const imageURL = URL.createObjectURL(file)
+  //     setEmployee({ ...employee, image_url: imageURL });
+  //   }
+  //   console.log(file.name);
+  // };
+
 
   return (
     <Box>
@@ -48,9 +59,11 @@ const EmployeeGrid = () => {
               <Card backgroundColor="#eff6f6">
                 <Image
                   src={
-                    employee.image_url == null
-                      ? getCroppedImageUrl(employee.image_url)
+                    employee.image_url
+                    ? employee.image_url instanceof Blob
+                      ? URL.createObjectURL(employee.image_url)
                       : `/src/assets/${employee.image_url}`
+                    : empimg
                   }
                   boxSize="100%"
                   height={270}
@@ -59,7 +72,8 @@ const EmployeeGrid = () => {
                 <CardBody>
                   <Heading fontSize="2xl">
                     <Link to={`/employees/${employee.idEmploye}`}>
-                      Employe: {employee.idEmploye}
+                      Matricule : {employee.idEmploye} <br /> 
+                      {/* Nom: {employee.nom} {employee.prenom} */}
                     </Link>
                   </Heading>
                 </CardBody>

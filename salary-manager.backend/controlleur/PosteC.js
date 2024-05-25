@@ -63,6 +63,21 @@ class PosteControlleur {
         }
     }
 
+    static async posteRecherche(req, res) {
+        try {
+            const id = req.query.idPoste;
+            const nom = req.query.nomPoste;
+            const salaire = req.query.salaire;
+
+            const result = await Postes.searchPoste(id, nom, salaire);
+            res.json(result);
+            console.log(result)
+        } catch (error) {
+            res.json(error);
+            console.log(error);
+        }
+    }
+
 };
 
 module.exports= PosteControlleur;

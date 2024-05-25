@@ -78,6 +78,38 @@ class Postes {
         })
     }
 
+    // static async searchPoste(id, nom, salaire) {
+    //     return new Promise(resolve => {
+    //         db.query("SELECT * FROM postes WHERE idPoste like ? ON nomPoste like ? ON salaire like ?", [id, `%${nom}%`, salaire], (err, result) => {
+    //             if(!err)
+    //                 resolve(result);
+    //         })
+    //     })
+    // }
+
+    static async searchPoste(id, nom, salaire) {
+        return new Promise((resolve, reject) => {
+            // Utilisation de placeholders dans la requête pour éviter l'injection SQL
+            let query = "SELECT * FROM postes WHERE idPoste LIKE?";
+            if (nom && nom!== '') { // Vérification si le nom n'est pas vide avant d'ajouter la condition
+                query += " AND nomPoste LIKE?";
+            }
+            if (salaire) { // Vérification si le salaire existe avant d'ajouter la condition
+                query += " AND salaire LIKE?";
+            }
+    
+            db.query(query, [id, `%${nom}%`, salaire], (err, result) => {
+                if (err) {
+                    reject(err); // Gestion des erreurs en rejettant la promesse avec l'erreur
+                } else {
+                    resolve(result); // Résolution de la promesse avec les résultats
+                }
+            });
+        });
+    }
+    
+
+
 };
 
 module.exports = Postes;

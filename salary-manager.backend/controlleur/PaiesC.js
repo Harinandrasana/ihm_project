@@ -22,7 +22,7 @@ exports.getAllPaies = async (req, res) => {
 exports.addNewPaie = async (req, res) => {
 
     //appelle de la methode getById definie dans EmployerM
-    console.log(req.body)
+    // console.log(req.body)
     const idEmploye = req.body.idEmploye;
     const datePaie = req.body.datePaie;
     const salaireNet = req.body.salaireNet;

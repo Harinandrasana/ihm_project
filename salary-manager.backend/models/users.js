@@ -19,6 +19,14 @@ class Users {
             });
         });
     }
+    static async getUsers() {
+        return new Promise(resolve => {
+            db.query("SELECT identifient, passWord FROM users", [], (err,result) => {
+                if(!err)
+                    resolve(result);
+            })
+        })
+    }
 
 }
 module.exports = Users;

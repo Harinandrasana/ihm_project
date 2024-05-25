@@ -64,13 +64,14 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEmployee({ ...employee, [name]: value });
+    setEmployee({ ...employee, [e.target.name]: e.target.value });
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setEmployee({ ...employee, image_url: file.name });
+      const imageURL = URL.createObjectURL(file)
+      setEmployee({ ...employee, image_url: imageURL });
     }
     console.log(file.name);
   };
@@ -109,9 +110,9 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                         objectFit="cover"
                         src={
                           employee.image_url
-                            ? employee.image_url instanceof Blob
-                              ? URL.createObjectURL(employee.image_url)
-                              : `/src/assets/${employee.image_url}`
+                            ? employee.image_url //instanceof Blob
+                              // ? URL.createObjectURL(employee.image_url)
+                              // : `/src/assets/${employee.image_url}`
                             : empimg
                         }
                         cursor="pointer"
@@ -201,7 +202,7 @@ const EmployeeEdit = ({ employeeId, onClose }) => {
                       id="dateNaissance"
                       name="dateNaissance"
                       required
-                      value={employee.dateNaissance}
+                      value={employee.dateNaissance }
                       onChange={handleChange}
                       mt={2}
                       placeholder="Select Date and Time"

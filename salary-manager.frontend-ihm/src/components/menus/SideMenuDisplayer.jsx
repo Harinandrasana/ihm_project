@@ -36,11 +36,12 @@ const SideMenuDisplayer = () => {
           aria-label="Options"
           icon={<HamburgerIcon />}
           variant="outline"
+          float={"left"}
         />
         <MenuList>
           <Link to="/">
             <MenuItem>
-              <HStack>
+              <HStack color="black">
                 <Icon as={AiOutlineHome} boxSize={7} />
                 <Text ml={6} mt={2}>
                   Accueil
@@ -50,7 +51,7 @@ const SideMenuDisplayer = () => {
           </Link>
           <Link to="/employees">
             <MenuItem>
-              <HStack>
+              <HStack color="black">
                 <Icon as={BiGroup} boxSize={7} />
                 <Text ml={6} mt={2}>
                   Employes
@@ -60,7 +61,7 @@ const SideMenuDisplayer = () => {
           </Link>
           <Link to="/postes">
             <MenuItem>
-              <HStack>
+              <HStack color="black">
                 <Icon as={FaBriefcase} boxSize={7} />
                 <Text ml={6} mt={2}>
                   Postes
@@ -70,9 +71,9 @@ const SideMenuDisplayer = () => {
           </Link>
           <Link to="/deductions">
             <MenuItem>
-              <HStack>
+              <HStack color="black">
                 <Icon as={FaMinusCircle} boxSize={7} />
-                <Text ml={6} mt={2}>
+                <Text ml={6}  mt={2}>
                   Deductions
                 </Text>
               </HStack>
@@ -80,9 +81,9 @@ const SideMenuDisplayer = () => {
           </Link>
           <Link to="/paies">
             <MenuItem>
-              <HStack>
+              <HStack color="black">
                 <Icon as={FaMoneyCheckAlt} boxSize={7} />
-                <Text ml={6} mt={2}>
+                <Text ml={6}  mt={2}>
                   Paies
                 </Text>
               </HStack>

@@ -23,6 +23,7 @@ router.delete('/delP/:id', PosteControlleur.deletePoste);
 router.put('/updateP/:id', PosteControlleur.updatePoste);
 router.get('/idNomP', PosteControlleur.selectIdNomPoste);
 router.get('/countP', PosteControlleur.countPostes);
+router.get('/searchP', PosteControlleur.posteRecherche);
 
 //route pour tous les traitement de DEDUCTION
 router.get('/allD', DeductionControlleur.getAllDeduction);
@@ -42,7 +43,7 @@ router.delete('/delA/:id', AvantageControlleur.deleteAvantage);
 
 //route pour tous les paies
 //route pour tous les traitement des AVANTAGES
-router.post('/paies', PaieControlleur.addNewPaie);
+router.post('/addPaies', PaieControlleur.addNewPaie);
 router.get('/paies', PaieControlleur.getAllPaies);
 // router.get('/oneA/:id', AvantageControlleur.getOneAvantage);
 // router.put('/updateA/:id', AvantageControlleur.updateAvantage);
@@ -51,6 +52,6 @@ router.get('/paies', PaieControlleur.getAllPaies);
 //route pour le login
 router.post('/addLog', UsersController.addUsers);
 router.post('/login', UsersController.Authentification);
-
+router.get('/getUsers', UsersController.getUsersC);
 
 module.exports = router;

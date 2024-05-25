@@ -29,6 +29,8 @@ class Paie {
         });
     }
 
+    
+
     static async getById(id) {
         return new Promise((resolve, reject) => {
             const test = db.query("SELECT * FROM paies WHERE idPaie=?", [id], (err, result) => {

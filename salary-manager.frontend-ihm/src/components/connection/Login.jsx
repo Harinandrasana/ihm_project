@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   FormControl,
@@ -16,6 +16,7 @@ import {
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import useLogin from "../../hooks/useLogin";
 import useRegister from "../../hooks/useRegister";
+import apiClient from "../../services/api-client";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -28,29 +29,92 @@ const Login = () => {
   const { register } = useRegister();
 
   const [isSignUp, setIsSignUp] = useState(false);
+    
   const [isEmpty, setIsEmpty] = useState(false);
+  const checkCurrentInput = () => {
+    if(
+      identifiant !== "" &&
+      password !== ""
+    ) {
+      setIsEmpty(!isEmpty);
+    } else {
+      setIsEmpty(true)
+    }
+  }
+
+  // const [user, setUser]= useState([]); 
+
+  const getUser = async () => {
+    const x = await apiClient.get('/getUsers');
+    setUser(x.data);
+  }
+
+  useEffect(() => {
+    getUser();
+  }, [])
+
+
+
+
+  // Ajoutez une fonction pour vérifier les identifiants et les mots de passe
+  const checkCredentials = () => {
+    const user = user.find(u => u.identifient === values.identifiant && u.passWord === values.password);
+    if (user) {
+      // Identifiant et mot de passe valides
+      return true;
+    } else {
+      // Identifiant ou mot de passe incorrects
+      return false;
+    }
+  };
+
+  const [user, setUser] = useState([]);
+
+
+  // const checkCredentials = () => {
+  //   if (user.length > 0) {
+  //     const userMatch = user.find(u => u.identifiant === values.identifiant && u.password === values.password);
+  //     if (userMatch) {
+  //       // Identifiant et mot de passe valides
+  //       return true;
+  //     } else {
+  //       // Identifiant ou mot de passe incorrects
+  //       return false;
+  //     }
+  //   } else {
+  //     // Aucun utilisateur trouvé, retournez false ou gérer autrement
+  //     return false;
+  //   }
+  // };
+  
+
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(
-      values.identifiant !== "" &&
-      values.password !== ""
-    ){
-      setIsEmpty(!isEmpty);
-    } else {
-      setIsEmpty(true);
       if (!isSignUp) {
-        login(values);
+        // if(checkCredentials()){
+          login(values);
+        // } else{
+        //     // Affichez un message d'erreur
+        //     alert("Identifiant ou mot de passe incorrect");
+        // }
+
       } else {
         const success = register(values);
         if (success) {
-          await login(values);
+          // if(checkCredentials()) {
+            await login(values);
+          // } else {
+          //   // Affichez un message d'erreur
+          //   alert("Identifiant ou mot de passe incorrect");
+          // }
         } else {
         }
       }
-    }
-  };
+    };
 
   return (
     <Container
@@ -96,6 +160,13 @@ const Login = () => {
                     Veuiller remplire le formulaire
                   </Text>
                 )
+                // (user.map = (e => {
+                //   (values.identifiant !== e.identifient) && (
+                //     <Text color={"red"} fontSize={14} pl="auto" >
+                //       identifiant incorrect!
+                //     </Text>
+                //   )
+                // }))
               }
             </FormControl>
             <FormControl id="password">
@@ -114,13 +185,7 @@ const Login = () => {
                   placeholder="Votre mot de passe"
                   _placeholder={{ color: "#8c8c8c" }}
                 />
-                {
-                (isEmpty && values.password === "") && (
-                  <Text color={"red"} fontSize={14} pl="auto" >
-                    Veuiller remplire le formulaire
-                  </Text>
-                )
-              }
+                
                 <InputRightElement width="4.5rem">
                   <Button h="1.75rem" size="sm" onClick={handleClick} pt={2}>
                     {show ? (
@@ -131,6 +196,14 @@ const Login = () => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
+                {
+                  (isEmpty && values.password === "") && (
+                    <Text color={"red"} fontSize={14} pl="auto" >
+                      Veuiller remplire le formulaire
+                    </Text>
+                  )
+                }
+                
             </FormControl>
             <Box mt={10}>
               <Stack>
@@ -142,6 +215,7 @@ const Login = () => {
                     w={"full"}
                     _hover={{ bg: "#004e7d" }}
                     _active={{ bg: "#004e7d" }}
+                    // onClick={checkCurrentInput}
                   >
                     Valider
                   </Button>
@@ -150,7 +224,7 @@ const Login = () => {
                   <Text>Already have an account?</Text>
                   <Button
                     bg="none"
-                    color={"#8ec4f1"}
+                    color={"blue.700"}
                     onClick={() => setIsSignUp(false)}
                     display={!isSignUp && "none"}
                     _hover={{
@@ -161,7 +235,7 @@ const Login = () => {
                   </Button>
                   <Button
                     bg={"none"}
-                    color={"#8ec4f1"}
+                    color={"blue.700"}
                     onClick={() => setIsSignUp(true)}
                     display={isSignUp && "none"}
                     _hover={{

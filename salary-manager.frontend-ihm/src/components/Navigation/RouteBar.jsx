@@ -29,6 +29,8 @@ const RouterBar = () => {
     "/postes": "Postes",
     "/deductions": "Deductions",
     "/paies": "Paies",
+    "/help" : "Page d'aide",
+    "/params": "Parametres"
   }
 
   const currentPageName = pathToPageName[location.pathname];

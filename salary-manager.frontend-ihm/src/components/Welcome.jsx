@@ -15,8 +15,8 @@ const Welcome = () => {
       >
         <Center ml="auto" mr="auto" textAlign="center">
           <Stack mb={1}>
-            <Text fontSize={50}>Bienvenu</Text>
-            <Text fontSize={20}>
+            <Text fontSize={50} color="white">Bienvenu</Text>
+            <Text fontSize={20} color="white">
               Veuiller vous connecter pour atteindre l'interface d'admnistration
             </Text>
           </Stack>

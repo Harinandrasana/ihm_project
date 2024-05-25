@@ -61,7 +61,6 @@ const EmployeeAdd = ({ onClose }) => {
     }
   };
 
-  const [phoneNumber, setPhoneNumber] = useState("");
 
   useEffect(() => {
     getPostes();
@@ -72,15 +71,18 @@ const EmployeeAdd = ({ onClose }) => {
     setPostes(response.data);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setValues({ ...values, [name]: value });
+  // };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setValues({ ...values, image_url: file.name });
+      // Créez un lien vers le fichier sélectionné
+      const imageURL = URL.createObjectURL(file);
+      // Mettez à jour les valeurs avec le lien vers l'image
+      setValues({ ...values, image_url: imageURL});
     }
   };
 
@@ -92,6 +94,7 @@ const EmployeeAdd = ({ onClose }) => {
       values.dateEmbauche !== ""
     ) {
       e.preventDefault();
+
       try {
         await apiClient.post("/addE", values);
         onClose();
@@ -108,16 +111,6 @@ const EmployeeAdd = ({ onClose }) => {
     return "1px solid red";
   };
 
-  // const formatPhoneNumber = (input) => {
-  //   const cleaned = ("" + input).replace(/\D/g, "");
-  //   const countryCode = "+261";
-  //   const areaCode = cleaned.slice(0, 3); // Madagascar a un indicatif régional à 3 chiffres
-  //   const firstSegment = cleaned.slice(3, 5);
-  //   const secondSegment = cleaned.slice(5, 7);
-  //   const thirdSegment = cleaned.slice(7, 9);
-  //   const fourthSegment = cleaned.slice(9); // Ajustement pour le quatrième segment
-  //   return `${countryCode}-${areaCode}-${firstSegment}-${secondSegment}-${thirdSegment}-${fourthSegment}`;
-  // };
   const [phone, setPhone]=useState("");
 
   const handleChange = (event)=>{
@@ -139,14 +132,9 @@ const EmployeeAdd = ({ onClose }) => {
       }
 
       setPhone(formattedPhoneNumber);
+      setValues({...values, tel: formattedPhoneNumber})
 
   };
-
-  // const handlePhoneNumberChange = (e) => {
-  //   const formattedPhoneNumber = formatPhoneNumber(e.target.value);
-  //   setPhoneNumber(formattedPhoneNumber);
-  //   setValues({ ...values, tel: formattedPhoneNumber });
-  // };
 
   return (
     <Container color="black" maxW="full" rounded={21} textAlign="center">
@@ -166,9 +154,7 @@ const EmployeeAdd = ({ onClose }) => {
                         objectFit="cover"
                         src={
                           values.image_url
-                            ? values.image_url instanceof Blob
-                              ? URL.createObjectURL(values.image_url)
-                              : `/src/assets/${values.image_url}`
+                            ? values.image_url 
                             : empimg
                         }
                         cursor="pointer"
@@ -249,10 +235,6 @@ const EmployeeAdd = ({ onClose }) => {
                       h={50}
                       type="text"
                       id="prenom"
-                      // required
-                      // border={
-                      //   isEmpty && values.prenom === "" && setErrorBorder()
-                      // }
                       onChange={(e) =>
                         setValues({ ...values, prenom: e.target.value })
                       }
@@ -304,7 +286,7 @@ const EmployeeAdd = ({ onClose }) => {
                           src={
                             !values.image_url
                               ? "/src/assets/no-image-placeholder.webp"
-                              : `/src/assets/${values.image_url}`
+                              : values.image_url
                           }
                           alt="photo de l'employe"
                         />
@@ -376,9 +358,9 @@ const EmployeeAdd = ({ onClose }) => {
                           h={50}
                           type="tel"
                           required
-                          // border={
-                          //   isEmpty && values.tel === "" && setErrorBorder()
-                          // }
+                          border={
+                            isEmpty && values.tel === "" && setErrorBorder()
+                          }
                           placeholder="+261-XX-XX-XXX-XX"
                           value={phone}
                           onChange={handleChange}
@@ -413,14 +395,14 @@ const EmployeeAdd = ({ onClose }) => {
                         h={50}
                         type="date"
                         max={new Date().toISOString().split("T")[0]} // Bloquer les dates après aujourd'hui
-                        disabled={
-                          new Date().getDay() === 0 || new Date().getDay() === 6
-                        } // Désactiver les samedis et dimanches
-                        color={
-                          new Date().getDay() === 0 || new Date().getDay() === 6
-                            ? "red"
-                            : ""
-                        } // Colorer en rouge les samedis et dimanches
+                        // disabled={
+                        //   new Date().getDay() === 0 || new Date().getDay() === 6
+                        // } // Désactiver les samedis et dimanches
+                        // color={
+                        //   new Date().getDay() === 0 || new Date().getDay() === 6
+                        //     ? "red"
+                        //     : ""
+                        // } // Colorer en rouge les samedis et dimanches
                       />
                       {isEmpty && values.dateEmbauche === "" && (
                         <Text color={"red"} fontSize={14} mx="auto">
@@ -450,7 +432,7 @@ const EmployeeAdd = ({ onClose }) => {
                 </HStack>
               </Box>
               <Box {...(visible && { display: "none" })}>
-                <Button p={6} onClick={() => checkCurrentInput()}>
+                <Button p={6} onClick={checkCurrentInput}>
                   suivant
                 </Button>
               </Box>

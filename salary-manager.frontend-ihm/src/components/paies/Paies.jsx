@@ -13,9 +13,9 @@ import {
   Button,
   Box,
 } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon, AddIcon } from "@chakra-ui/icons";
+// import { DeleteIcon, EditIcon, AddIcon } from "@chakra-ui/icons";
 import apiClient from "../../services/api-client";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import usePdf from "../../hooks/usePdf";
 import { FaPrint } from "react-icons/fa";
 
@@ -78,7 +78,7 @@ const Paies = () => {
               <Tr key={paie.idPaie} borderBottom="2px solid #f3f2f2">
                 <Td verticalAlign="middle">{paie.idPaie}</Td>
                 <Td verticalAlign="middle">{paie.idEmploye}</Td>
-                <Td verticalAlign="middle">{paie.mois}</Td>
+                <Td verticalAlign="middle">{paie.datePaie}</Td>
                 <Td verticalAlign="middle">{paie.salaireNet}</Td>
                 <Td verticalAlign="middle">{paie.salaireBrut}</Td>
                 <Td verticalAlign="middle">{paie.totalDeduction}</Td>
@@ -93,7 +93,7 @@ const Paies = () => {
                       leftIcon={<DeleteIcon />}
                       onClick={() => deletePaie(paie.idPaie)}
                     ></Button> */}
-                    <Button bg="white" onClick={() => generatePDF()}>
+                    <Button bg="white" onClick={() => generatePDF(paies)}>
                       <FaPrint />
                     </Button>{" "}
                   </HStack>

@@ -1,4 +1,4 @@
-import { Button, HStack, useDisclosure } from "@chakra-ui/react";
+import { Button, HStack, Link, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import EmployeeModal from "./EmployeeModal";
 import apiClient from "../../services/api-client";
@@ -42,6 +42,8 @@ const ActionButton = ({ employeeId }) => {
     }
   };
 
+  
+
   useEffect(() => {
     getDeduction();
   }, [employeeId]);
@@ -73,6 +75,36 @@ const ActionButton = ({ employeeId }) => {
     }
   }, [deduction]);
 
+
+  const sendDeductionData = async () => {
+    try {
+
+        // Récupérer la date actuelle
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().split('T')[0]; // Format la date au format YYYY-MM-DD
+
+      const dataToSend = {
+        idEmploye: employeeId,
+        datePaie: formattedDate,
+        salaireNet: deduction[0]?.salaire - totalMontant, 
+        salaireBrut: deduction[0]?.salaire, 
+        totalDeduction: totalTaux, 
+      };
+  
+      const response = await apiClient.post('/addPaies', dataToSend);
+      console.log('Deduction data submitted successfully:', response.data);
+    } catch (error) {
+      console.error('Error submitting deduction data:', error);
+    }
+  };
+  
+  const handleClick = (event) => {
+    event.preventDefault();
+    sendDeductionData();
+    navigate('/paies')
+  };
+
+
   return (
     <HStack>
       <Button
@@ -94,7 +126,7 @@ const ActionButton = ({ employeeId }) => {
         <DeleteIcon />
       </Button>
       <Button bg="#50f8c4">
-        <Icon as={FaMoneyCheckAlt} boxSize={6} />
+          <Icon as={FaMoneyCheckAlt} boxSize={6} onClick={handleClick}/>
       </Button>
     </HStack>
   );
