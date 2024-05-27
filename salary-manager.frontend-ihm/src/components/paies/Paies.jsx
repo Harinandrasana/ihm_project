@@ -1,99 +1,94 @@
 import React, { useEffect, useState } from "react";
 import {
-  TableContainer,
+  Box,
   Table,
   Tr,
   Th,
   Thead,
   Tbody,
-  TableCaption,
   Td,
-  Tfoot,
   HStack,
   Button,
-  Box,
 } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon, AddIcon } from "@chakra-ui/icons";
-import apiClient from "../../services/api-client";
-import { Link } from "react-router-dom";
-import usePdf from "../../hooks/usePdf";
 import { FaPrint } from "react-icons/fa";
-import TablePagination from "../paginations/TablePagination";
+import apiClient from "../../services/api-client";
+import usePdf from "../../hooks/usePdf";
 
 const Paies = () => {
   const [paies, setPaies] = useState([]);
   const { generatePDF } = usePdf();
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     getPaies();
-  }, []);
+  }, [currentPage]);
 
   const getPaies = async () => {
-    const response = await apiClient.get("/paies");
-    setPaies(response.data);
+    try {
+      const response = await apiClient.get(
+        `/paies?_page=${currentPage}&_limit=2`
+      );
+      setPaies(response.data);
+    } catch (error) {
+      console.error("Error fetching paies:", error);
+    }
   };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString("fr-FR"); // Formater la date en "jj/mm/aaaa"
+    return date.toLocaleDateString("fr-FR"); // Format the date as "dd/mm/yyyy"
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
   };
 
   return (
     <Box>
-      <TableContainer
-        mr={10}
-        pt={2}
-        px={5}
-        border="1px solid #f2f2f2"
-        roundedTopLeft={21}
-        roundedTopRight={21}
-        color="black"
-        alignItems="center"
-        alignContent="center"
-      >
-        <Table variant="striped" colorScheme="teal">
-          <Thead h={58}>
-            <Tr borderBottom="2px solid #f3f2f2">
-              <Th>N° payement</Th>
-              <Th>Identifiant employe</Th>
-              <Th>Date du paiement</Th>
-              <Th>Salaire net</Th>
-              <Th>Salaire brut</Th>
-              <Th>Total déduit</Th>
-              <Th>Total avantage</Th>
-              <Th>Actions</Th>
+      <Table variant="striped" colorScheme="teal">
+        <Thead>
+          <Tr>
+            <Th>N° payment</Th>
+            <Th>Employee ID</Th>
+            <Th>Date of payment</Th>
+            <Th>Net salary</Th>
+            <Th>Gross salary</Th>
+            <Th>Total deductions</Th>
+            <Th>Total benefits</Th>
+            <Th>Actions</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {paies.map((paie) => (
+            <Tr key={paie.idPaie}>
+              <Td>{paie.idPaie}</Td>
+              <Td>{paie.idEmploye}</Td>
+              <Td>{formatDate(paie.datePaie)}</Td>
+              <Td>{paie.salaireNet}</Td>
+              <Td>{paie.salaireBrut}</Td>
+              <Td>{paie.totalDeduction}</Td>
+              <Td>{paie.totalAvantage}</Td>
+              <Td>
+                <HStack>
+                  <Button bg="white" onClick={() => generatePDF()}>
+                    <FaPrint />
+                  </Button>
+                </HStack>
+              </Td>
             </Tr>
-          </Thead>
-          <Tbody>
-            {paies.map((paie) => (
-              <Tr key={paie.idPaie} borderBottom="2px solid #f3f2f2">
-                <Td verticalAlign="middle">{paie.idPaie}</Td>
-                <Td verticalAlign="middle">{paie.idEmploye}</Td>
-                <Td verticalAlign="middle">{formatDate(paie.datePaie)}</Td>
-                <Td verticalAlign="middle">{paie.salaireNet}</Td>
-                <Td verticalAlign="middle">{paie.salaireBrut}</Td>
-                <Td verticalAlign="middle">{paie.totalDeduction}</Td>
-                <Td verticalAlign="middle">{paie.totalAvantage}</Td>
-                <Td verticalAlign="middle">
-                  <HStack>
-                    {/* <Link to={`edit/${paie.idPaie}`}>
-                      <Button bg="#2388f6" leftIcon={<EditIcon />}></Button>
-                    </Link>
-                    <Button
-                      bg="#dc1f09"
-                      leftIcon={<DeleteIcon />}
-                      onClick={() => deletePaie(paie.idPaie)}
-                    ></Button> */}
-                    <Button bg="white" onClick={() => generatePDF()}>
-                      <FaPrint />
-                    </Button>{" "}
-                  </HStack>
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+          ))}
+        </Tbody>
+      </Table>
+      <HStack mt={4} spacing={4} justify="center">
+        <Button onClick={handlePrevPage} disabled={currentPage === 1}>
+          Previous
+        </Button>
+        <Button onClick={handleNextPage}>Next</Button>
+      </HStack>
     </Box>
   );
 };

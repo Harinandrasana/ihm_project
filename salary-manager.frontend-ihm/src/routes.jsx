@@ -16,7 +16,7 @@ import TestPage from "./components/TestPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: connectedUser ? <Layout /> : <ConnectionPage />,
+    element: connectedUser ? <Layout /> : <Layout />,
     errorElement: <ErrorPage />,
     children: [
       {
