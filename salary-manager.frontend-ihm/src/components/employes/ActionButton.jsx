@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import EmployeeModal from "./EmployeeModal";
 import apiClient from "../../services/api-client";
 import { useNavigate } from "react-router-dom";
-import { DeleteIcon, EditIcon, AddIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Icon } from "@chakra-ui/react";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import useNotification from "../../hooks/useNotification";
 
-const ActionButton = ({ employeeId }) => {
+const ActionButton = ({ employeeId, setIsLoading }) => {
   const { displayToast } = useNotification();
   const navigate = useNavigate();
   const [addMod, setAddMode] = useState(false);
@@ -21,6 +21,7 @@ const ActionButton = ({ employeeId }) => {
 
   const closeAndRefresh = () => {
     onClose();
+    // Assurez-vous que la fonction getEmployees est définie quelque part
     getEmployees();
   };
 
@@ -87,20 +88,35 @@ const ActionButton = ({ employeeId }) => {
           totalDeduction: totalMontant,
           totalAvantage: 0,
         });
+
         if (response) {
           displayToast(
             "success",
             "Le paiement de l'employé a été effectué avec succès"
           );
+        } else {
+          displayToast(
+            "error",
+            "Une erreur est survenue lors du paiement de l'employé"
+          );
         }
       } else {
-        console.error(
-          "Erreur : Les valeurs nécessaires ne sont pas définies correctement."
+        displayToast(
+          "error",
+          "Une erreur est survenue lors du paiement de l'employé"
         );
       }
     } catch (error) {
       console.error("Error to add paies", error);
+      displayToast(
+        "error",
+        "Une erreur est survenue lors du paiement de l'employé"
+      );
     }
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000); // 5000 ms = 5 seconds
   };
 
   return (

@@ -47,19 +47,15 @@ const EmployeeGrid = () => {
             >
               <Card backgroundColor="#eff6f6">
                 <Image
-                  src={
-                    employee.image_url == null
-                      ? getCroppedImageUrl(employee.image_url)
-                      : `/src/assets/${employee.image_url}`
-                  }
+                  src={getCroppedImageUrl(employee.image_url)}
                   boxSize="100%"
                   height={270}
                   objectFit="cover"
                 />
                 <CardBody>
-                  <Heading fontSize="2xl">
+                  <Heading fontSize="lg">
                     <Link to={`/employees/${employee.idEmploye}`}>
-                      Employe: {employee.idEmploye}
+                      Matricule: {employee.idEmploye}
                     </Link>
                   </Heading>
                 </CardBody>

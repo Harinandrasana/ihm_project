@@ -134,11 +134,11 @@ const Postes = () => {
           {/* <TableCaption>Listes des employes de la société</TableCaption> */}
           <Thead h={58}>
             <Tr verticalAlign="middle" borderBottom="2px solid #f3f2f2">
-              <Th>Identifiant du poste</Th>
-              <Th>Designation</Th>
-              <Th>Salaire</Th>
-              <Th>Description</Th>
-              <Th>Actions</Th>
+              <Th textAlign="center">Identifiant du poste</Th>
+              <Th textAlign="center">Designation</Th>
+              <Th textAlign="center">Salaire</Th>
+              <Th textAlign="center">Description</Th>
+              <Th textAlign="center">Actions</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -148,37 +148,41 @@ const Postes = () => {
                 verticalAlign="middle"
                 borderBottom="2px solid #f3f2f2"
               >
-                <Td verticalAlign="middle">{poste.idPoste}</Td>
-                <Td verticalAlign="middle">{poste.nomPoste}</Td>
-                <Td verticalAlign="middle">{poste.salaire}</Td>
+                <Td verticalAlign="middle" textAlign="center">
+                  {poste.idPoste}
+                </Td>
+                <Td verticalAlign="middle" textAlign="center">
+                  {poste.nomPoste}
+                </Td>
+                <Td verticalAlign="middle" textAlign="center">
+                  {poste.salaire}
+                </Td>
                 <Td
                   verticalAlign="middle"
+                  textAlign="center"
                   w={isSmallScreen ? "100%" : "auto"}
                   wordBreak={isSmallScreen ? "break-word" : "normal"}
                 >
                   {poste.commentaire === "" ? "aucun" : poste.commentaire}
                 </Td>
-                <Td>
-                  <HStack spacing={8} textAlign={"center"}>
-                    <Container>
-                      <Button
-                        bg="#2388f6"
-                        mr={8}
-                        onClick={() => {
-                          setSelectedId(poste.idPoste);
-                          setAddMode(false);
-                          onOpen();
-                        }}
-                      >
-                        <EditIcon />
-                      </Button>
-                      <Button
-                        bg="#dc1f09"
-                        onClick={() => deletePoste(poste.idPoste)}
-                      >
-                        <DeleteIcon />
-                      </Button>
-                    </Container>
+                <Td px={{ base: "2%", md: "2%", lg: "3%" }}>
+                  <HStack spacing={2} textAlign={"center"}>
+                    <Button
+                      bg="#2388f6"
+                      onClick={() => {
+                        setSelectedId(poste.idPoste);
+                        setAddMode(false);
+                        onOpen();
+                      }}
+                    >
+                      <EditIcon />
+                    </Button>
+                    <Button
+                      bg="#dc1f09"
+                      onClick={() => deletePoste(poste.idPoste)}
+                    >
+                      <DeleteIcon />
+                    </Button>
                   </HStack>
                 </Td>
               </Tr>

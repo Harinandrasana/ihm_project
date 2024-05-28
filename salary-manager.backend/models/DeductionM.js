@@ -56,6 +56,17 @@ class Deductions {
             });
         });
     }
+
+
+    static async countDeduction() {
+        return new Promise(resolve => {
+            db.query("SELECT COUNT(*) AS nbTotalDeduction FROM deductions",
+                (err, result) => {
+                    if (!err)
+                        resolve(result);
+                })
+        })
+    }
 };
 
 

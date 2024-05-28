@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../services/api-client";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
+import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 
-const PaieStatus = ({ employeeId }) => {
+const PaieStatus = ({ employeeId, isLoading }) => {
   const [data, setData] = useState(null); // Utiliser null comme valeur initiale pour data
 
   const checkPaieIfExist = async () => {
@@ -30,12 +31,24 @@ const PaieStatus = ({ employeeId }) => {
     return () => clearInterval(interval);
   }, []);
 
+  if (isLoading === true)
+    return <CircularProgress isIndeterminate color="green.300" />;
   return (
     <Box>
       {data !== null ? (
-        <CheckIcon color="green.500" boxSize={10} />
+        <Box alignItems={"center"}>
+          <Box mx={"40%"}>
+            <CheckIcon color="green.500" boxSize={10} />
+          </Box>
+          <Text color="green">Paiement effectué</Text>
+        </Box>
       ) : (
-        <CloseIcon color="red.500" boxSize={10} />
+        <Box>
+          <Box mx={"40%"}>
+            <CloseIcon color="red.500" boxSize={10} />
+          </Box>
+          <Text color="red">En attente de paiement</Text>
+        </Box>
       )}
     </Box>
   );

@@ -19,6 +19,18 @@ exports.getAllEmployees = async (req, res) => {
 };
 
 
+exports.countEmploye = async (req, res) => {
+    try {
+        const result = await Employee.countEmploye();
+        res.json(result);
+        // res.json({message: `le total des employe est: ${result}`})
+    } catch (error) {
+        res.status(500).json({ message: error.message || "Erreur lors de requete." });
+        console.log(error)
+    }
+}
+
+
 exports.addNewEmployer = async (req, res) => {
 
     //appelle de la methode getById definie dans EmployerM

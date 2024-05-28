@@ -10,13 +10,11 @@ import {
   HStack,
   Button,
 } from "@chakra-ui/react";
-import { FaPrint } from "react-icons/fa";
 import apiClient from "../../services/api-client";
-import usePdf from "../../hooks/usePdf";
+import PaySlipPDF from "../pdf/PaySlipPDF";
 
 const Paies = () => {
   const [paies, setPaies] = useState([]);
-  const { generatePDF } = usePdf();
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -74,9 +72,7 @@ const Paies = () => {
               <Td>{paie.totalAvantage}</Td>
               <Td>
                 <HStack>
-                  <Button bg="white" onClick={() => generatePDF()}>
-                    <FaPrint />
-                  </Button>
+                  <PaySlipPDF employeeId={paie.idEmploye} />
                 </HStack>
               </Td>
             </Tr>

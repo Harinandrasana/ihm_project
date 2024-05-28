@@ -10,6 +10,13 @@ import {
   HStack,
   Textarea,
   Text,
+  Center,
+  ModalFooter,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import apiClient from "../../services/api-client";
@@ -53,93 +60,108 @@ const PosteEdit = ({ posteId, onClose }) => {
   if (!poste) return <div>Loading...</div>;
 
   const checkCurrentInput = () => {
-    if(
-      poste.nomPoste !== "" &&
-      poste.salaire !== ""
-    ) {
+    if (poste.nomPoste !== "" && poste.salaire !== "") {
       setIsEmpty(!isEmpty);
     } else setIsEmpty(true);
-
-  }
+  };
 
   return (
-    <Container color="black" maxW="full" rounded={21} textAlign="center">
-      <Box>
-        <form onSubmit={handleSubmit}>
-          <Stack>
-            <FormControl id="nomPoste">
-              <FormLabel>Designation</FormLabel>
-              <Input
-                bg="white"
-                h={50}
-                border="1px solid black"
-                placeholder="Designation du poste"
-                _placeholder={{ color: "#8c8c8c" }}
-                type="text"
-                name="nomPoste"
-                id="nomPoste"
-                required
-                value={poste.nomPoste}
-                onChange={handleChange}
-              />
-              {(isEmpty && poste.nomPoste === "") && (
-                <Text color={"red"} fontSize={14} pl={"auto"}>
-                  Veuiller donner un nom de poste
-                </Text>
-              )}
-            </FormControl>
-            <FormControl id="salaire">
-              <FormLabel>Salaire</FormLabel>
-              <Input
-                bg="white"
-                h={50}
-                border="1px solid black"
-                placeholder="Montant salaire"
-                _placeholder={{ color: "#8c8c8c" }}
-                type="number"
-                name="salaire"
-                id="salaire"
-                required
-                value={poste.salaire}
-                onChange={handleChange}
-              />
-              {(isEmpty && poste.salaire === "") && (
-                <Text color={"red"} fontSize={14} pl={"auto"}>
-                  Veuiller rajouter un salaire
-                </Text>
-              )}
-            </FormControl>
-            <FormControl id="commentaire">
-              <FormLabel>Description</FormLabel>
-              <Textarea
-                bg="white"
-                h={50}
-                border="1px solid black"
-                type="text"
-                name="commentaire"
-                id="commentaire"
-                value={poste.commentaire}
-                onChange={handleChange}
-                placeholder="Ajouter les descriptions du poste"
-                _placeholder={{ color: "#8c8c8c" }}
-              />
-            </FormControl>
-            <Box mt={2} ml="auto" mr="auto">
+    <Box minW={550}>
+      <form onSubmit={handleSubmit}>
+        <Stack>
+          <FormControl id="nomPoste">
+            <FormLabel>Designation</FormLabel>
+            <Input
+              bg="white"
+              h={50}
+              border="1px solid black"
+              placeholder="Designation du poste"
+              _placeholder={{ color: "#8c8c8c" }}
+              type="text"
+              name="nomPoste"
+              id="nomPoste"
+              required
+              value={poste.nomPoste}
+              onChange={handleChange}
+            />
+            {isEmpty && poste.nomPoste === "" && (
+              <Text color={"red"} fontSize={14} pl={"auto"}>
+                Veuiller donner un nom de poste
+              </Text>
+            )}
+          </FormControl>
+          <FormControl id="salaire">
+            <FormLabel>Salaire</FormLabel>
+            <NumberInput
+              defaultValue={30000}
+              precision={2}
+              step={0.2}
+              bg="white"
+              id="salaire"
+              name="salaire"
+              border="hidden"
+              rounded={6}
+              required
+              placeholder="Entrer le montant du salaire"
+              _placeholder={{ color: "#8c8c8c" }}
+              type="number"
+              value={poste.salaire}
+              onChange={handleChange}
+            >
+              <NumberInputField height={50} />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+            {isEmpty && poste.salaire === "" && (
+              <Text color={"red"} fontSize={14} pl={"auto"}>
+                Veuiller rajouter un salaire
+              </Text>
+            )}
+          </FormControl>
+          <FormControl id="commentaire">
+            <FormLabel>Description</FormLabel>
+            <Textarea
+              bg="white"
+              h={50}
+              border="1px solid black"
+              type="text"
+              name="commentaire"
+              id="commentaire"
+              value={poste.commentaire}
+              onChange={handleChange}
+              placeholder="Ajouter les descriptions du poste"
+              _placeholder={{ color: "#8c8c8c" }}
+            />
+          </FormControl>
+          <ModalFooter>
+            <Center mt={3} ml="auto">
               <HStack spacing={8}>
                 <Link to="/postes">
-                  <Button p={7} bg="red" onClick={() => onClose()}>
+                  <Button
+                    p={7}
+                    bg="red"
+                    onClick={() => onClose()}
+                    colorScheme="red"
+                  >
                     Annuler
                   </Button>
                 </Link>
-                <Button onClick={checkCurrentInput} p={7} type="submit" bg="green">
+                <Button
+                  onClick={checkCurrentInput}
+                  p={7}
+                  type="submit"
+                  colorScheme="green"
+                >
                   Valider
                 </Button>
               </HStack>
-            </Box>
-          </Stack>
-        </form>
-      </Box>
-    </Container>
+            </Center>
+          </ModalFooter>
+        </Stack>
+      </form>
+    </Box>
   );
 };
 

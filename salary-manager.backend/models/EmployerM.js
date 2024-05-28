@@ -31,7 +31,7 @@ class Employee {
 
     static async getById(id) {
         return new Promise((resolve, reject) => {
-            const test = db.query("SELECT *, nomPoste FROM employes LEFT JOIN postes ON employes.idPoste = postes.idPoste WHERE idEmploye=?", [id], (err, result) => {
+            const test = db.query("SELECT * FROM employes WHERE idEmploye=?", [id], (err, result) => {
                 if (err) {
 
                     reject(err);
@@ -80,6 +80,16 @@ class Employee {
             });
         });
     }
+
+    static async countEmploye() {
+        return new Promise(resolve => {
+            db.query(`SELECT COUNT(*) AS nbTotalEmploye FROM employes`, (err, result) => {
+                if (!err)
+                    resolve(result);
+            });
+        })
+    }
+
 
 
 }

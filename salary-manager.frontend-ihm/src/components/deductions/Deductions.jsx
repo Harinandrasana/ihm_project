@@ -132,42 +132,50 @@ const Deductions = () => {
           {/* <TableCaption>Listes des employes de la societé</TableCaption> */}
           <Thead h={58}>
             <Tr borderBottom="2px solid #f3f2f2">
-              <Th>Identifiant</Th>
-              <Th>Designation</Th>
-              <Th>Poste</Th>
-              <Th>Taux déduit</Th>
-              <Th>Actions</Th>
+              <Th textAlign={"center"}>Identifiant</Th>
+              <Th textAlign={"center"}>Designation</Th>
+              <Th textAlign={"center"}>Poste</Th>
+              <Th textAlign={"center"}>Taux déduit</Th>
+              <Th textAlign={"center"}>Actions</Th>
             </Tr>
           </Thead>
           <Tbody>
             {deduction.map((deduction) => (
               <Tr key={deduction.idDeduction} borderBottom="2px solid #f3f2f2">
-                <Td verticalAlign="middle">{deduction.idDeduction}</Td>
-                <Td verticalAlign="middle">{deduction.design}</Td>
-                <Td verticalAlign="middle">{deduction.nomPoste}</Td>
-                <Td verticalAlign="middle">{deduction.tauxD} %</Td>
-                <Td verticalAlign="middle">
-                  <HStack>
-                    <Container>
-                      <Button
-                        bg="#2388f6"
-                        mr={8}
-                        onClick={() => {
-                          setSelectedId(deduction.idDeduction);
-                          setOverlay(<OverlayTwo />);
-                          setAddMode(false);
-                          onOpen();
-                        }}
-                      >
-                        <EditIcon />
-                      </Button>
-                      <Button
-                        bg="#dc1f09"
-                        onClick={() => deleteDeduction(deduction.idDeduction)}
-                      >
-                        <DeleteIcon />
-                      </Button>
-                    </Container>
+                <Td verticalAlign="middle" textAlign={"center"}>
+                  {deduction.idDeduction}
+                </Td>
+                <Td verticalAlign="middle" textAlign={"center"}>
+                  {deduction.design}
+                </Td>
+                <Td verticalAlign="middle" textAlign={"center"}>
+                  {deduction.nomPoste}
+                </Td>
+                <Td verticalAlign="middle" textAlign={"center"}>
+                  {deduction.tauxD} %
+                </Td>
+                <Td
+                  verticalAlign="middle"
+                  px={{ base: "2%", md: "3%", lg: "4%" }}
+                >
+                  <HStack spacing={2}>
+                    <Button
+                      bg="#2388f6"
+                      onClick={() => {
+                        setSelectedId(deduction.idDeduction);
+                        setOverlay(<OverlayTwo />);
+                        setAddMode(false);
+                        onOpen();
+                      }}
+                    >
+                      <EditIcon />
+                    </Button>
+                    <Button
+                      bg="#dc1f09"
+                      onClick={() => deleteDeduction(deduction.idDeduction)}
+                    >
+                      <DeleteIcon />
+                    </Button>
                   </HStack>
                 </Td>
               </Tr>

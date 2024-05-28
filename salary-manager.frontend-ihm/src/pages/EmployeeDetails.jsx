@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Employee from "../components/employes/Employee";
 import {
   Box,
@@ -19,6 +19,7 @@ import AvantageCheckBox from "../components/avantages/AvantageCheckBox";
 
 const EmployeeDetails = () => {
   const { employeeId: employeeId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <Container maxW={"full"} h={"auto"}>
@@ -39,8 +40,7 @@ const EmployeeDetails = () => {
                 <Box>
                   <Deduction employeeId={employeeId} />
                   <Center mt={5}>
-                    <Text mr={5}>Etat du paiement: {"  "} </Text>
-                    <PaieStatus employeeId={employeeId} />
+                    <PaieStatus employeeId={employeeId} isLoading={isLoading} />
                   </Center>
                 </Box>
                 <Box>
@@ -53,7 +53,7 @@ const EmployeeDetails = () => {
       </Grid>
       <Divider />
       <Center mt={5}>
-        <ActionButton employeeId={employeeId} />
+        <ActionButton employeeId={employeeId} setIsLoading={setIsLoading} />
       </Center>
     </Container>
   );

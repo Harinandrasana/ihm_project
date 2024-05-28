@@ -56,11 +56,7 @@ const Employee = ({ employeeId }) => {
           minW={300}
           rounded={21}
           maxW={{ base: "100%", sm: "200px" }}
-          src={
-            employee.image_url === null
-              ? getCroppedImageUrl(employee.image_url)
-              : `/src/assets/${employee.image_url}`
-          }
+          src={getCroppedImageUrl(employee.image_url)}
           alt="Image de l'employe"
         />
 

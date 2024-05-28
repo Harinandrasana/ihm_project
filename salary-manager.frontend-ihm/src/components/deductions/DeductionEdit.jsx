@@ -9,6 +9,9 @@ import {
   HStack,
   Select,
   Text,
+  Stack,
+  Center,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import apiClient from "../../services/api-client";
@@ -21,17 +24,16 @@ const DeductionEdit = ({ deductionId, onClose }) => {
   const [isEmpty, setIsEmpty] = useState(false);
 
   const checkCurrentInput = () => {
-    if(
+    if (
       deduction.idPoste !== 0 &&
       deduction.design !== "" &&
       deduction.TauxD !== ""
     ) {
       setIsEmpty(!isEmpty);
     } else {
-      setIsEmpty (true);
+      setIsEmpty(true);
     }
-
-  }
+  };
 
   useEffect(() => {
     getDeductionById();
@@ -71,95 +73,105 @@ const DeductionEdit = ({ deductionId, onClose }) => {
   if (!deduction) return <div>Loading...</div>;
 
   return (
-    <Container color="black" maxW="full" rounded={21} textAlign="center">
-      <Box>
-        <form onSubmit={handleSubmit}>
-          <HStack spacing={15} textAlign="center" ml="auto" mr="auto">
-            <Box>
-              <FormLabel>Poste</FormLabel>
-              <Box bg="white" rounded={4}>
-                <Select
-                  placeholder="Select option"
-                  _placeholder={{ color: "#8c8c8c" }}
-                  h={50}
-                  name="idPoste"
-                  value={deduction.idPoste}
-                  onChange={handleChange}
-                >
-                  {postes.map((poste) => (
-                    <option key={poste.idPoste} value={poste.idPoste}>
-                      {poste.nomPoste}
-                    </option>
-                  ))}
-                </Select>
-                {(isEmpty && deduction.idPoste === 0) && (
-                  <Text color={"red"} fontSize={14} pl={'auto'}>
-                    Veuiller selection un Poste
-                  </Text>
-                )}
-              </Box>
-              <FormControl id="design">
-                <FormLabel>Designation</FormLabel>
-                <Input
-                  bg="white"
-                  border="1px solid black"
-                  h={50}
-                  type="text"
-                  id="design"
-                  name="design"
-                  required
-                  value={deduction.design}
-                  onChange={handleChange}
-                  placeholder="Designation"
-                  _placeholder={{ color: "#8c8c8c" }}
-                />
-                {(isEmpty && deduction.design === "") && (
-                  <Text color={"red"} fontSize={14} pl={"auto"}>
-                    Veuiller remplire le formulaire
-                  </Text>
-                )}
-              </FormControl>
+    <Box minW={550}>
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={15} textAlign="center" ml="auto" mr="auto">
+          <Box>
+            <FormLabel>Poste</FormLabel>
+            <Box bg="white" rounded={4}>
+              <Select
+                placeholder="Select option"
+                _placeholder={{ color: "#8c8c8c" }}
+                h={50}
+                name="idPoste"
+                value={deduction.idPoste}
+                onChange={handleChange}
+              >
+                {postes.map((poste) => (
+                  <option key={poste.idPoste} value={poste.idPoste}>
+                    {poste.nomPoste}
+                  </option>
+                ))}
+              </Select>
+              {isEmpty && deduction.idPoste === 0 && (
+                <Text color={"red"} fontSize={14} pl={"auto"}>
+                  Veuiller selection un Poste
+                </Text>
+              )}
             </Box>
-            <Box>
-              <FormControl id="TauxD">
-                <FormLabel>Taux à déduire</FormLabel>
-                <Input
-                  bg="white"
-                  border="1px solid black"
-                  h={50}
-                  mb={3}
-                  type="number"
-                  name="TauxD"
-                  id="TauxD"
-                  required
-                  value={deduction.TauxD}
-                  onChange={handleChange}
-                  placeholder="taux déduit"
-                  _placeholder={{ color: "#8c8c8c" }}
-                />
-                {(isEmpty && deduction.TauxD === "") && (
-                  <Text color={"red"} fontSize={14} pl={"auto"}>
-                    Veuiller remplire le formulaire
-                  </Text>
-                )}
-              </FormControl>
-              <Box mt={3} ml="auto" mr="auto">
+            <FormControl id="design">
+              <FormLabel>Designation</FormLabel>
+              <Input
+                bg="white"
+                border="1px solid black"
+                h={50}
+                type="text"
+                id="design"
+                name="design"
+                required
+                value={deduction.design}
+                onChange={handleChange}
+                placeholder="Designation"
+                _placeholder={{ color: "#8c8c8c" }}
+              />
+              {isEmpty && deduction.design === "" && (
+                <Text color={"red"} fontSize={14} pl={"auto"}>
+                  Veuiller remplire le formulaire
+                </Text>
+              )}
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl id="TauxD">
+              <FormLabel>Taux à déduire</FormLabel>
+              <Input
+                bg="white"
+                border="1px solid black"
+                h={50}
+                mb={3}
+                type="number"
+                name="TauxD"
+                id="TauxD"
+                required
+                value={deduction.tauxD}
+                onChange={handleChange}
+                placeholder="taux déduit"
+                _placeholder={{ color: "#8c8c8c" }}
+              />
+              {isEmpty && deduction.TauxD === "" && (
+                <Text color={"red"} fontSize={14} pl={"auto"}>
+                  Veuiller remplire le formulaire
+                </Text>
+              )}
+            </FormControl>
+            <ModalFooter>
+              <Center mt={5} ml="auto">
                 <HStack spacing={8}>
                   <Link to="/deductions">
-                    <Button p={7} bg="red" onClick={() => onClose()}>
+                    <Button
+                      p={7}
+                      bg="red"
+                      onClick={() => onClose()}
+                      colorScheme="red"
+                    >
                       Annuler
                     </Button>
                   </Link>
-                  <Button onClick={checkCurrentInput} p={7} type="submit" bg="green">
+                  <Button
+                    onClick={checkCurrentInput}
+                    p={7}
+                    type="submit"
+                    colorScheme="green"
+                  >
                     Valider
                   </Button>
                 </HStack>
-              </Box>
-            </Box>
-          </HStack>
-        </form>
-      </Box>
-    </Container>
+              </Center>
+            </ModalFooter>
+          </Box>
+        </Stack>
+      </form>
+    </Box>
   );
 };
 

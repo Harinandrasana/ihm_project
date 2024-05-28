@@ -5,6 +5,8 @@ const DeductionControlleur = require("../controlleur/DeductionC");
 const PosteControlleur = require("../controlleur/PosteC");
 const AvantageControlleur = require("../controlleur/AvantageC");
 const PaieControlleur = require("../controlleur/PaiesC");
+const UsersController = require("../controlleur/usersC");
+
 
 //route pour tous les traitement de l'EMPLOYE 
 router.post('/addE', EmployeC.addNewEmployer);
@@ -43,5 +45,10 @@ router.get('/paies', PaieControlleur.getAllPaies);
 router.get('/paies/:id', PaieControlleur.getPaieByEmployeeId);
 // router.put('/updateA/:id', AvantageControlleur.updateAvantage);
 // router.delete('/delA/:id', AvantageControlleur.deleteAvantage);
+
+//route pour le login
+router.post('/addLog', UsersController.addUsers);
+router.post('/login', UsersController.Authentification);
+router.get('/getUsers', UsersController.getUsersC);
 
 module.exports = router;

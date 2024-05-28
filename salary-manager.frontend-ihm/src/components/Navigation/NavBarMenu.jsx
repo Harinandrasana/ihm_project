@@ -30,7 +30,7 @@ const NavBarMenu = () => {
         icon={<AiOutlineUser color="white" />}
         variant="outline"
       />
-      <MenuList>
+      <MenuList position={"relative"} zIndex={3}>
         <Link to="/params">
           <MenuItem>
             <MdSettings />
