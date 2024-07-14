@@ -1,2 +1,2 @@
 # ihm_project
-projet 32 L3 ENI
+Gestion de salaire des employés d'une societé
